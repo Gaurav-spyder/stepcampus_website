@@ -110,13 +110,12 @@ export default function ShoppingCartProjectPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                     {filteredProducts.map(product => (
                         <Card key={product.id} className="flex flex-col">
-                            <CardHeader className="p-0">
+                            <CardHeader className="p-0 relative aspect-video">
                                 <Image
                                     src={product.imageUrl}
                                     alt={product.name}
-                                    width={600}
-                                    height={400}
-                                    className="w-full object-cover aspect-video rounded-t-lg"
+                                    fill
+                                    className="w-full object-cover rounded-t-lg"
                                     data-ai-hint={product.imageHint}
                                 />
                             </CardHeader>
@@ -152,7 +151,9 @@ export default function ShoppingCartProjectPage() {
                             <div className="space-y-4">
                                 {cart.map(item => (
                                     <div key={item.product.id} className="flex items-center gap-4">
-                                        <Image src={item.product.imageUrl} alt={item.product.name} width={64} height={64} className="rounded-md object-cover" data-ai-hint={item.product.imageHint}/>
+                                        <div className="relative w-16 h-16">
+                                            <Image src={item.product.imageUrl} alt={item.product.name} fill className="rounded-md object-cover" data-ai-hint={item.product.imageHint}/>
+                                        </div>
                                         <div className="flex-1">
                                             <p className="font-semibold text-sm">{item.product.name}</p>
                                             <p className="text-xs text-muted-foreground">${item.product.price.toFixed(2)}</p>
