@@ -138,6 +138,10 @@ export default function PlaygroundPage() {
     setClickLog(prev => [message, ...prev].slice(0,5));
   }
 
+  const handleShowAlert = React.useCallback(() => {
+    alert('This is a simple JavaScript alert.');
+  }, []);
+
   const nestedFrameContent = `
     <body style="background-color: #E0E8F0; border: 2px solid #29ABE2; border-radius: 8px; padding: 1rem; font-family: sans-serif;">
       <h3 style="color: #000;">Nested Frame</h3>
@@ -291,7 +295,7 @@ export default function PlaygroundPage() {
             <Button
               variant="outline"
               className="w-full"
-              onClick={() => alert('This is a simple JavaScript alert.')}
+              onClick={handleShowAlert}
             >
               Show JS Alert
             </Button>
