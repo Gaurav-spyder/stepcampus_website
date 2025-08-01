@@ -16,7 +16,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, MapPin } from 'lucide-react';
 
 const contactFormSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
@@ -59,21 +59,14 @@ export default function ContactPage() {
               <MapPin className="h-6 w-6 text-primary mt-1" />
               <div>
                 <h3 className="font-semibold text-foreground">Our Office</h3>
-                <p>123 Test Automation Ave, Silicon Valley, CA 94043</p>
+                <p>You are in office</p>
               </div>
             </div>
             <div className="flex items-start gap-4">
               <Mail className="h-6 w-6 text-primary mt-1" />
               <div>
                 <h3 className="font-semibold text-foreground">Email Us</h3>
-                <p>contact@stepcampus.io</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-4">
-              <Phone className="h-6 w-6 text-primary mt-1" />
-               <div>
-                <h3 className="font-semibold text-foreground">Call Us</h3>
-                <p>+1 (555) 123-4567</p>
+                <p>yourstepcampus@gmail.com</p>
               </div>
             </div>
           </div>
