@@ -24,9 +24,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { useToast } from '@/hooks/use-toast';
-import { ArrowLeft, Upload } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const formSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
@@ -37,7 +37,7 @@ const formSchema = z.object({
 });
 
 export default function ComplexFormProjectPage() {
-    const { toast } = useToast();
+    const router = useRouter();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -51,11 +51,8 @@ export default function ComplexFormProjectPage() {
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         console.log(values);
-        toast({
-        title: 'Form Submitted!',
-        description: 'Your data has been successfully recorded.',
-        });
         form.reset();
+        router.push('/projects/complex-form/success');
     }
 
   return (
