@@ -26,7 +26,7 @@ const projects = [
       'Log links that return a status code of 404 or higher.',
       'Output the results to a CSV or text file.',
     ],
-    href: '#',
+    href: '/projects/broken-links',
   },
   {
     id: 'form-submission',
