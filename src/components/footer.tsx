@@ -92,7 +92,7 @@ export function Footer() {
       <div className="border-t">
         <div className="container flex items-center justify-center py-4">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} TestSpace. All rights reserved.
+            © {new Date().getFullYear()} StepCampus. All rights reserved.
           </p>
         </div>
       </div>

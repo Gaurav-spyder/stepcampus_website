@@ -7,8 +7,8 @@ import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
   title: {
-    default: 'TestSpace - Practice Automation Testing Online!',
-    template: '%s | TestSpace',
+    default: 'StepCampus - Practice Automation Testing Online!',
+    template: '%s | StepCampus',
   },
   description: 'A responsive and clean Test Automation Learning Platform Website using Next.js and Tailwind CSS for QA testers and automation learners to practice UI components and read tutorials.',
 };

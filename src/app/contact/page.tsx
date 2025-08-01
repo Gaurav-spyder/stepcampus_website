@@ -66,7 +66,7 @@ export default function ContactPage() {
               <Mail className="h-6 w-6 text-primary mt-1" />
               <div>
                 <h3 className="font-semibold text-foreground">Email Us</h3>
-                <p>contact@testspace.io</p>
+                <p>contact@stepcampus.io</p>
               </div>
             </div>
             <div className="flex items-start gap-4">
