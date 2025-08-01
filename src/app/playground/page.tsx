@@ -561,7 +561,10 @@ export default function PlaygroundPage() {
                     <div
                         ref={dragRef}
                         onMouseDown={handleMouseDown}
-                        className="absolute cursor-grab p-2 bg-primary text-primary-foreground rounded-lg shadow-lg"
+                        className={cn(
+                          "absolute p-2 bg-primary text-primary-foreground rounded-lg shadow-lg transition-all duration-75",
+                          isDragging ? 'cursor-grabbing scale-105 shadow-2xl' : 'cursor-grab'
+                        )}
                         style={{ left: `${position.x}px`, top: `${position.y}px` }}
                     >
                        <Move className="h-5 w-5 inline-block mr-2" /> Drag me
