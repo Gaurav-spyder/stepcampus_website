@@ -54,13 +54,13 @@ export function Footer() {
             Contact Us
           </Link>
           <div className="flex items-center gap-4 pt-2">
-            <Link href="#" aria-label="LinkedIn">
+            <Link href="https://www.linkedin.com/in/gauravgupta1998/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
               <Linkedin className="h-5 w-5 text-muted-foreground transition-colors hover:text-foreground" />
             </Link>
-            <Link href="#" aria-label="YouTube">
+            <Link href="https://www.youtube.com/@stepcampus" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
               <Youtube className="h-5 w-5 text-muted-foreground transition-colors hover:text-foreground" />
             </Link>
-            <Link href="#" aria-label="GitHub">
+            <Link href="https://github.com/Gaurav-" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
               <Github className="h-5 w-5 text-muted-foreground transition-colors hover:text-foreground" />
             </Link>
           </div>
