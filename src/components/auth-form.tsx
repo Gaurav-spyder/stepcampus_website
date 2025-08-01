@@ -25,6 +25,7 @@ import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { Alert, AlertDescription, AlertTitle } from './ui/alert';
 import { Terminal } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
 
 const loginSchema = z.object({
   email: z.string().email({ message: 'Invalid email address.' }),
@@ -39,6 +40,7 @@ const signupSchema = z.object({
   password: z
     .string()
     .min(6, { message: 'Password must be at least 6 characters.' }),
+  captcha: z.string().nonempty({ message: 'Please solve the captcha.' }),
 });
 
 type AuthFormProps = {
@@ -49,12 +51,49 @@ export function AuthForm({ type }: AuthFormProps) {
   const isLogin = type === 'login';
   const formSchema = isLogin ? loginSchema : signupSchema;
   const { toast } = useToast();
+  
+  const [captcha, setCaptcha] = useState<{ num1: number, num2: number, operator: string, answer: number } | null>(null);
+
+  const generateCaptcha = () => {
+    const num1 = Math.floor(Math.random() * 10) + 1;
+    const num2 = Math.floor(Math.random() * 10) + 1;
+    const operators = ['+', '-', '*'];
+    const operator = operators[Math.floor(Math.random() * operators.length)];
+    let answer;
+    switch (operator) {
+        case '+':
+            answer = num1 + num2;
+            break;
+        case '-':
+            // ensure result is not negative
+            if (num1 < num2) {
+                answer = num2 - num1;
+                setCaptcha({ num1: num2, num2: num1, operator, answer });
+                return;
+            }
+            answer = num1 - num2;
+            break;
+        case '*':
+            answer = num1 * num2;
+            break;
+        default:
+            answer = num1 + num2;
+    }
+    setCaptcha({ num1, num2, operator, answer });
+  };
+  
+  useEffect(() => {
+    if (!isLogin) {
+      generateCaptcha();
+    }
+  }, [isLogin]);
+
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: isLogin
       ? { email: '', password: '' }
-      : { username: '', email: '', password: '' },
+      : { username: '', email: '', password: '', captcha: '' },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -71,13 +110,24 @@ export function AuthForm({ type }: AuthFormProps) {
             form.setError('password', { type: 'manual', message: 'Invalid email or password.' });
         }
     } else {
+        const { captcha: captchaAnswer } = values as z.infer<typeof signupSchema>;
+        if (captcha && parseInt(captchaAnswer, 10) !== captcha.answer) {
+            form.setError('captcha', { type: 'manual', message: 'Incorrect captcha answer. Try again.' });
+            generateCaptcha();
+            return;
+        }
         console.log(values);
-        // Handle signup logic
+        toast({
+            title: 'Signup Successful!',
+            description: 'You can now log in with your credentials.',
+        });
+        form.reset();
+        generateCaptcha();
     }
   }
 
   return (
-    <div className="flex min-h-[calc(100vh-10rem)] items-center justify-center">
+    <div className="flex min-h-[calc(100vh-10rem)] items-center justify-center py-12">
       <Card className="w-full max-w-sm">
         <CardHeader>
           <CardTitle className="font-headline text-2xl">
@@ -151,6 +201,27 @@ export function AuthForm({ type }: AuthFormProps) {
                   </FormItem>
                 )}
               />
+               {!isLogin && captcha && (
+                <FormField
+                  control={form.control}
+                  name="captcha"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>
+                        What is {captcha.num1} {captcha.operator} {captcha.num2}?
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="number"
+                          placeholder="Your answer"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
               <Button type="submit" className="w-full">
                 {isLogin ? 'Login' : 'Sign Up'}
               </Button>
