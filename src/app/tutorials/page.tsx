@@ -11,6 +11,13 @@ const tutorials = [
     imageUrl: 'https://placehold.co/600x400.png',
     imageHint: 'automation testing',
   },
+  {
+    title: 'Cypress Full Course',
+    description: 'Learn end-to-end testing with Cypress with this comprehensive course.',
+    href: 'https://www.youtube.com/watch?v=L5_J2aaa_sA',
+    imageUrl: 'https://placehold.co/600x400.png',
+    imageHint: 'cypress automation',
+  },
 ];
 
 export default function TutorialsPage() {
@@ -25,7 +32,7 @@ export default function TutorialsPage() {
         </p>
       </div>
 
-      <div className="mx-auto grid max-w-2xl gap-8">
+      <div className="mx-auto grid max-w-2xl gap-8 md:grid-cols-2">
         {tutorials.map((tutorial) => (
           <Card key={tutorial.title} className="overflow-hidden">
              <Link href={tutorial.href} target="_blank" rel="noopener noreferrer">
@@ -34,7 +41,7 @@ export default function TutorialsPage() {
                 alt={tutorial.title}
                 width={600}
                 height={400}
-                className="w-full object-cover"
+                className="w-full object-cover aspect-[3/2]"
                 data-ai-hint={tutorial.imageHint}
               />
             </Link>
