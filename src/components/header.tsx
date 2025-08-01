@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -20,11 +21,6 @@ const navLinks = [
 
 export function Header() {
   const pathname = usePathname();
-  const [isClient, setIsClient] = React.useState(false);
-
-  React.useEffect(() => {
-    setIsClient(true);
-  }, []);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -34,7 +30,7 @@ export function Header() {
         </div>
 
         <nav className="hidden items-center gap-6 text-sm font-medium md:flex">
-          {isClient && navLinks.map((link) => (
+          {navLinks.map((link) => (
             <Link
               key={`${link.href}-${link.label}`}
               href={link.href}
@@ -52,37 +48,35 @@ export function Header() {
 
         <div className="flex flex-1 items-center justify-between md:justify-end">
           <div className="md:hidden">
-            {isClient && (
-              <Sheet>
-                <SheetTrigger asChild>
-                  <Button variant="ghost" size="icon">
-                    <Menu className="h-6 w-6" />
-                    <span className="sr-only">Toggle navigation menu</span>
-                  </Button>
-                </SheetTrigger>
-                <SheetContent side="left">
-                  <div className="flex flex-col gap-6 p-6">
-                    <Logo />
-                    <nav className="grid gap-4">
-                      {navLinks.map((link) => (
-                        <Link
-                          key={`${link.href}-${link.label}-mobile`}
-                          href={link.href}
-                          className={cn(
-                            'rounded-md px-3 py-2 text-base transition-colors hover:bg-accent hover:text-accent-foreground',
-                            pathname === link.href
-                              ? 'bg-accent text-accent-foreground'
-                              : 'text-foreground'
-                          )}
-                        >
-                          {link.label}
-                        </Link>
-                      ))}
-                    </nav>
-                  </div>
-                </SheetContent>
-              </Sheet>
-            )}
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Menu className="h-6 w-6" />
+                  <span className="sr-only">Toggle navigation menu</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left">
+                <div className="flex flex-col gap-6 p-6">
+                  <Logo />
+                  <nav className="grid gap-4">
+                    {navLinks.map((link) => (
+                      <Link
+                        key={`${link.href}-${link.label}-mobile`}
+                        href={link.href}
+                        className={cn(
+                          'rounded-md px-3 py-2 text-base transition-colors hover:bg-accent hover:text-accent-foreground',
+                          pathname === link.href
+                            ? 'bg-accent text-accent-foreground'
+                            : 'text-foreground'
+                        )}
+                      >
+                        {link.label}
+                      </Link>
+                    ))}
+                  </nav>
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </div>
