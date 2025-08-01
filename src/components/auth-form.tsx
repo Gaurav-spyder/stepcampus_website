@@ -22,6 +22,9 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { useToast } from '@/hooks/use-toast';
+import { Alert, AlertDescription, AlertTitle } from './ui/alert';
+import { Terminal } from 'lucide-react';
 
 const loginSchema = z.object({
   email: z.string().email({ message: 'Invalid email address.' }),
@@ -45,6 +48,7 @@ type AuthFormProps = {
 export function AuthForm({ type }: AuthFormProps) {
   const isLogin = type === 'login';
   const formSchema = isLogin ? loginSchema : signupSchema;
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -54,8 +58,22 @@ export function AuthForm({ type }: AuthFormProps) {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    // Handle form submission
+    if (isLogin) {
+        const { email, password } = values as z.infer<typeof loginSchema>;
+        if (email === 'hi@stepcampus.com' && password === 'Stepcampus@123') {
+             toast({
+                title: 'Login Successful!',
+                description: 'Welcome back!',
+             });
+             form.reset();
+        } else {
+            form.setError('email', { type: 'manual', message: 'Invalid email or password.' });
+            form.setError('password', { type: 'manual', message: 'Invalid email or password.' });
+        }
+    } else {
+        console.log(values);
+        // Handle signup logic
+    }
   }
 
   return (
@@ -72,6 +90,16 @@ export function AuthForm({ type }: AuthFormProps) {
           </CardDescription>
         </CardHeader>
         <CardContent>
+          {isLogin && (
+            <Alert className="mb-4">
+              <Terminal className="h-4 w-4" />
+              <AlertTitle>Demo Credentials</AlertTitle>
+              <AlertDescription className="text-xs">
+                <p>Email: <span className="font-mono">hi@stepcampus.com</span></p>
+                <p>Password: <span className="font-mono">Stepcampus@123</span></p>
+              </AlertDescription>
+            </Alert>
+          )}
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               {!isLogin && (
