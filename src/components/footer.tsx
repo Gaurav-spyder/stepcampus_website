@@ -60,7 +60,7 @@ export function Footer() {
             <Link href="https://www.youtube.com/@stepcampus" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
               <Youtube className="h-5 w-5 text-muted-foreground transition-colors hover:text-foreground" />
             </Link>
-            <Link href="https://github.com/Gaurav-" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+            <Link href="https://github.com/Gaurav-spyder" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
               <Github className="h-5 w-5 text-muted-foreground transition-colors hover:text-foreground" />
             </Link>
           </div>
