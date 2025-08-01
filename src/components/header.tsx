@@ -73,11 +73,6 @@ export function Header() {
               </SheetContent>
             </Sheet>
           </div>
-          <div className="flex items-center gap-2">
-            <Button asChild>
-              <Link href="/login">Login</Link>
-            </Button>
-          </div>
         </div>
       </div>
     </header>
