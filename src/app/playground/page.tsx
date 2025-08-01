@@ -9,7 +9,8 @@ import {
   Eye,
   EyeOff,
   Upload,
-  ChevronsUpDown
+  ChevronsUpDown,
+  Move
 } from 'lucide-react';
 import {
   AlertDialog,
@@ -70,6 +71,10 @@ import { format } from 'date-fns';
 import React from 'react';
 import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
+import { Switch } from '@/components/ui/switch';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Slider } from '@/components/ui/slider';
+
 
 const frameworks = [
   { value: 'react', label: 'React' },
@@ -82,23 +87,57 @@ const frameworks = [
 export default function PlaygroundPage() {
   const { toast } = useToast();
   const [hideElement, setHideElement] = React.useState(false);
-  const [date, setDate] = React.useState<Date | undefined>();
+  const [date, setDate] = React.useState<Date | undefined>(undefined);
   const [openCombobox, setOpenCombobox] = React.useState(false);
   const [comboboxValue, setComboboxValue] = React.useState('');
   const [keyboardLog, setKeyboardLog] = React.useState<string[]>([]);
+  const [clickLog, setClickLog] = React.useState<string[]>([]);
+
+  const [isDragging, setIsDragging] = React.useState(false);
+  const [position, setPosition] = React.useState({ x: 0, y: 0 });
+  const [offset, setOffset] = React.useState({ x: 0, y: 0 });
+  const dragRef = React.useRef<HTMLDivElement>(null);
+
 
   React.useEffect(() => {
     setDate(new Date());
   }, []);
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (dragRef.current) {
+        setIsDragging(true);
+        setOffset({
+            x: e.clientX - dragRef.current.offsetLeft,
+            y: e.clientY - dragRef.current.offsetTop,
+        });
+    }
+  };
+  
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+      if (isDragging) {
+          setPosition({
+              x: e.clientX - offset.x,
+              y: e.clientY - offset.y,
+          });
+      }
+  };
+
+  const handleMouseUp = () => {
+      setIsDragging(false);
+  };
   
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    setKeyboardLog(prev => [...prev, `Key down: ${e.key}`].slice(-5));
+    setKeyboardLog(prev => [`Key down: ${e.key}`, ...prev].slice(0, 5));
   };
 
   const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    setKeyboardLog(prev => [...prev, `Key up: ${e.key}`].slice(-5));
+    setKeyboardLog(prev => [`Key up: ${e.key}`, ...prev].slice(0, 5));
   };
-  
+
+  const logClick = (message: string) => {
+    setClickLog(prev => [message, ...prev].slice(0,5));
+  }
+
   const nestedFrameContent = `
     <body style="background-color: #E0E8F0; border: 2px solid #29ABE2; border-radius: 8px; padding: 1rem; font-family: sans-serif;">
       <h3 style="color: #000;">Nested Frame</h3>
@@ -160,6 +199,13 @@ export default function PlaygroundPage() {
                 <Checkbox id="newsletter" defaultChecked />
                 <Label htmlFor="newsletter">Subscribe to newsletter</Label>
               </div>
+            </div>
+             <div className="space-y-2">
+                <Label>Switch & Toggle</Label>
+                <div className="flex items-center space-x-2">
+                    <Switch id="airplane-mode" />
+                    <Label htmlFor="airplane-mode">Toggle</Label>
+                </div>
             </div>
           </CardContent>
         </Card>
@@ -331,7 +377,23 @@ export default function PlaygroundPage() {
             )}
           </CardContent>
         </Card>
-
+        
+        {/* Click Actions */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="font-headline">Click Actions</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+              <Button className="w-full" onClick={() => logClick('Single click triggered.')}>Single Click</Button>
+              <Button className="w-full" onDoubleClick={() => logClick('Double click triggered.')}>Double Click</Button>
+              <Button className="w-full" onContextMenu={(e) => {e.preventDefault(); logClick('Right click triggered.')}}>Right Click</Button>
+              <ScrollArea className="h-20 mt-2 w-full rounded-md border p-2 text-xs">
+                    {clickLog.map((log, i) => <div key={i}>{log}</div>)}
+                    {clickLog.length === 0 && <span className="text-muted-foreground">Click the buttons above...</span>}
+                </ScrollArea>
+          </CardContent>
+        </Card>
+        
         {/* Tables */}
         <Card className="lg:col-span-2">
           <CardHeader>
@@ -385,6 +447,35 @@ export default function PlaygroundPage() {
             </iframe>
             <p className="mt-2 text-sm text-muted-foreground">The element above is an iframe containing a nested iframe.</p>
           </CardContent>
+        </Card>
+        
+        {/* Tabs */}
+        <Card>
+            <CardHeader><CardTitle className="font-headline">Switch Tabs</CardTitle></CardHeader>
+            <CardContent>
+                 <Tabs defaultValue="account">
+                    <TabsList className="grid w-full grid-cols-2">
+                        <TabsTrigger value="account">Account</TabsTrigger>
+                        <TabsTrigger value="password">Password</TabsTrigger>
+                    </TabsList>
+                    <TabsContent value="account">
+                        <Card>
+                            <CardHeader><CardTitle>Account</CardTitle></CardHeader>
+                            <CardContent className="space-y-2">
+                                <p>This is the account tab.</p>
+                            </CardContent>
+                        </Card>
+                    </TabsContent>
+                    <TabsContent value="password">
+                         <Card>
+                            <CardHeader><CardTitle>Password</CardTitle></CardHeader>
+                            <CardContent className="space-y-2">
+                                <p>This is the password tab.</p>
+                            </CardContent>
+                        </Card>
+                    </TabsContent>
+                </Tabs>
+            </CardContent>
         </Card>
 
         {/* Scroll */}
@@ -450,6 +541,45 @@ export default function PlaygroundPage() {
             </div>
           </CardContent>
         </Card>
+        
+        {/* Simple List */}
+        <Card>
+            <CardHeader><CardTitle>Simple List</CardTitle></CardHeader>
+            <CardContent>
+                <ul className="list-disc pl-5 space-y-2 text-sm text-muted-foreground">
+                    <li>First item</li>
+                    <li>Second item</li>
+                    <li>Third item</li>
+                    <li>Fourth item</li>
+                </ul>
+            </CardContent>
+        </Card>
+        
+        {/* Drag and Drop */}
+        <Card onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onMouseLeave={handleMouseUp} className="overflow-hidden">
+            <CardHeader><CardTitle>Drag and Drop</CardTitle></CardHeader>
+            <CardContent>
+                <div className="relative h-48 w-full rounded-md border-2 border-dashed">
+                    <div
+                        ref={dragRef}
+                        onMouseDown={handleMouseDown}
+                        className="absolute cursor-grab p-2 bg-primary text-primary-foreground rounded-lg shadow-lg"
+                        style={{ left: `${position.x}px`, top: `${position.y}px` }}
+                    >
+                       <Move className="h-5 w-5 inline-block mr-2" /> Drag me
+                    </div>
+                </div>
+            </CardContent>
+        </Card>
+        
+        {/* Slider */}
+         <Card>
+            <CardHeader><CardTitle>Slider</CardTitle></CardHeader>
+            <CardContent>
+                <Slider defaultValue={[50]} max={100} step={1} />
+            </CardContent>
+        </Card>
+
 
         {/* Date Picker */}
         <Card>
