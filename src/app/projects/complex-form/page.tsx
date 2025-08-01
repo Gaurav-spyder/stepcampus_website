@@ -33,7 +33,7 @@ const formSchema = z.object({
   gender: z.enum(['male', 'female'], { required_error: 'Please select a gender.' }),
   sport: z.string({ required_error: 'Please select a sport.' }),
   file: z.any().refine(files => files?.length === 1, 'File is required.'),
-  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Please enter a date in YYYY-MM-DD format.'),
+  date: z.string().regex(/^\d{2}\/\d{2}\/\d{4}$/, 'Please enter a date in DD/MM/YYYY format.'),
 });
 
 export default function ComplexFormProjectPage() {
@@ -172,10 +172,10 @@ export default function ComplexFormProjectPage() {
                                 <FormItem>
                                 <FormLabel>Pick a date</FormLabel>
                                 <FormControl>
-                                    <Input type="text" placeholder="YYYY-MM-DD" {...field} />
+                                    <Input type="text" placeholder="DD/MM/YYYY" {...field} />
                                 </FormControl>
                                 <FormDescription>
-                                    Please enter a date in YYYY-MM-DD format.
+                                    Please enter a date in DD/MM/YYYY format.
                                 </FormDescription>
                                 <FormMessage />
                                 </FormItem>
