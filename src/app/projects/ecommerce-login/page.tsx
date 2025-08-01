@@ -1,5 +1,4 @@
 import { Button } from '@/components/ui/button';
-import { ShoppingCart } from 'lucide-react';
 import Link from 'next/link';
 
 export default function EcommerceProjectPage() {
@@ -11,10 +10,6 @@ export default function EcommerceProjectPage() {
             ShopCo
           </Link>
           <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon">
-              <ShoppingCart className="h-6 w-6" />
-              <span className="sr-only">Shopping Cart</span>
-            </Button>
             <Button asChild>
               <Link href="/login">Login</Link>
             </Button>
