@@ -97,6 +97,7 @@ export default function PlaygroundPage() {
   const [position, setPosition] = React.useState({ x: 0, y: 0 });
   const [offset, setOffset] = React.useState({ x: 0, y: 0 });
   const dragRef = React.useRef<HTMLDivElement>(null);
+  const [toggleState, setToggleState] = React.useState(false);
 
 
   React.useEffect(() => {
@@ -204,8 +205,12 @@ export default function PlaygroundPage() {
              <div className="space-y-2">
                 <Label>Switch & Toggle</Label>
                 <div className="flex items-center space-x-2">
-                    <Switch id="airplane-mode" />
-                    <Label htmlFor="airplane-mode">Toggle</Label>
+                    <Switch
+                        id="airplane-mode"
+                        checked={toggleState}
+                        onCheckedChange={setToggleState}
+                    />
+                    <Label htmlFor="airplane-mode">{toggleState ? 'ON' : 'OFF'}</Label>
                 </div>
             </div>
           </CardContent>
