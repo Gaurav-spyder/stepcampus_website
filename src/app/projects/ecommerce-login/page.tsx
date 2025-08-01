@@ -5,10 +5,7 @@ export default function EcommerceProjectPage() {
   return (
     <div className="bg-background">
       <header className="border-b sticky top-0 bg-background/95 z-10">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between">
-          <Link href="/projects" className="font-headline text-2xl font-bold">
-            ShopCo
-          </Link>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-end">
           <div className="flex items-center gap-4">
             <Button asChild>
               <Link href="/login">Login</Link>
