@@ -36,7 +36,7 @@ export function Header() {
         <nav className="hidden items-center gap-6 text-sm font-medium md:flex">
           {navLinks.map((link) => (
             <Link
-              key={link.href}
+              key={`${link.href}-${link.label}`}
               href={link.href}
               className={cn(
                 'transition-colors hover:text-foreground/80',
@@ -66,7 +66,7 @@ export function Header() {
                     <nav className="grid gap-4">
                       {navLinks.map((link) => (
                         <Link
-                          key={link.href}
+                          key={`${link.href}-${link.label}-mobile`}
                           href={link.href}
                           className={cn(
                             'rounded-md px-3 py-2 text-base transition-colors hover:bg-accent hover:text-accent-foreground',
