@@ -1,9 +1,6 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
+import { Check } from 'lucide-react';
 
 const projects = [
   {
@@ -15,7 +12,6 @@ const projects = [
       'Verify error message for invalid username or password.',
       'Verify "Forgot Password" link functionality.',
       'Verify that user is redirected to the dashboard after login.',
-      'Test login form with empty fields.',
     ],
   },
   {
@@ -26,7 +22,6 @@ const projects = [
       'Crawl all `<a>` tags on the homepage.',
       'Send an HTTP request to each link\'s href.',
       'Log links that return a status code of 404 or higher.',
-      'Handle network timeouts gracefully.',
       'Output the results to a CSV or text file.',
     ],
   },
@@ -38,9 +33,7 @@ const projects = [
       'Fill all text inputs with valid data.',
       'Select options from dropdowns.',
       'Check radio buttons and checkboxes.',
-      'Upload a file using the file input.',
-      'Pick a date from the date picker.',
-      'Submit the form and verify the success message.',
+      'Upload a file and pick a date.',
     ],
   },
   {
@@ -49,12 +42,9 @@ const projects = [
     description: 'Automate the process of adding items to a shopping cart and proceeding to checkout.',
     testCases: [
       'Search for a product.',
-      'Add the product to the cart from the search results page.',
-      'Navigate to the product details page and add to cart.',
+      'Add the product to the cart.',
       'Verify the cart count updates correctly.',
-      'Navigate to the cart page and verify item details (name, price, quantity).',
       'Update item quantity in the cart.',
-      'Remove an item from the cart.',
     ],
   },
 ];
@@ -71,25 +61,29 @@ export default function ProjectsPage() {
         </p>
       </div>
 
-      <div className="mx-auto max-w-3xl">
-        <Accordion type="single" collapsible className="w-full">
+      <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-2">
           {projects.map((project) => (
-            <AccordionItem key={project.id} value={project.id}>
-              <AccordionTrigger className="font-headline text-lg">
-                {project.title}
-              </AccordionTrigger>
-              <AccordionContent className="space-y-4 px-2">
-                <p className="text-muted-foreground">{project.description}</p>
-                <h4 className="font-semibold">Sample Test Case Ideas:</h4>
-                <ul className="list-disc space-y-2 pl-6 text-muted-foreground">
+            <Card key={project.id} className="flex flex-col">
+              <CardHeader>
+                <CardTitle className="font-headline">{project.title}</CardTitle>
+                <CardDescription>{project.description}</CardDescription>
+              </CardHeader>
+              <CardContent className="flex-1 space-y-4">
+                <h4 className="font-semibold">Test Case Ideas:</h4>
+                <ul className="space-y-2">
                   {project.testCases.map((tc, index) => (
-                    <li key={index}>{tc}</li>
+                    <li key={index} className="flex items-start gap-2">
+                        <Check className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
+                        <span className="text-muted-foreground">{tc}</span>
+                    </li>
                   ))}
                 </ul>
-              </AccordionContent>
-            </AccordionItem>
+              </CardContent>
+              <CardFooter>
+                 <Button variant="outline" className="w-full">View Project</Button>
+              </CardFooter>
+            </Card>
           ))}
-        </Accordion>
       </div>
     </div>
   );
