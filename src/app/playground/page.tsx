@@ -82,10 +82,14 @@ const frameworks = [
 export default function PlaygroundPage() {
   const { toast } = useToast();
   const [hideElement, setHideElement] = React.useState(false);
-  const [date, setDate] = React.useState<Date | undefined>(new Date());
+  const [date, setDate] = React.useState<Date | undefined>();
   const [openCombobox, setOpenCombobox] = React.useState(false);
   const [comboboxValue, setComboboxValue] = React.useState('');
   const [keyboardLog, setKeyboardLog] = React.useState<string[]>([]);
+
+  React.useEffect(() => {
+    setDate(new Date());
+  }, []);
   
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     setKeyboardLog(prev => [...prev, `Key down: ${e.key}`].slice(-5));
