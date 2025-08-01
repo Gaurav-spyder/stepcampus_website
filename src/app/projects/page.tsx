@@ -52,7 +52,7 @@ const projects = [
       'Verify the cart count updates correctly.',
       'Update item quantity in the cart.',
     ],
-    href: '#',
+    href: '/projects/shopping-cart',
   },
 ];
 
