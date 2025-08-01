@@ -105,13 +105,13 @@ export default function PlaygroundPage() {
     // This now correctly runs only on the client
     const today = new Date();
     setDate(today);
-    setDateInput(format(today, 'MM/dd/yyyy'));
+    setDateInput(format(today, 'dd/MM/yyyy'));
   }, []);
 
   const handleDateInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setDateInput(value);
-    const parsedDate = parse(value, 'MM/dd/yyyy', new Date());
+    const parsedDate = parse(value, 'dd/MM/yyyy', new Date());
     if (!isNaN(parsedDate.getTime())) {
       setDate(parsedDate);
     }
@@ -638,7 +638,7 @@ export default function PlaygroundPage() {
                     <PopoverContent className="w-auto p-0 space-y-2">
                       <Input
                         type="text"
-                        placeholder="MM/DD/YYYY"
+                        placeholder="DD/MM/YYYY"
                         value={dateInput}
                         onChange={handleDateInputChange}
                         className="m-2 w-[calc(100%-1rem)]"
