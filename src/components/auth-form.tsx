@@ -26,6 +26,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Alert, AlertDescription, AlertTitle } from './ui/alert';
 import { Terminal } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const loginSchema = z.object({
   email: z.string().email({ message: 'Invalid email address.' }),
@@ -50,6 +51,7 @@ export function AuthForm({ type }: AuthFormProps) {
   const isLogin = type === 'login';
   const formSchema = isLogin ? loginSchema : signupSchema;
   const { toast } = useToast();
+  const router = useRouter();
   
   const [captcha, setCaptcha] = useState<{ num1: number, num2: number, operator: string, answer: number } | null>(null);
 
@@ -101,9 +103,10 @@ export function AuthForm({ type }: AuthFormProps) {
         if (email === 'hi@stepcampus.com' && password === 'Stepcampus@123') {
              toast({
                 title: 'Login Successful!',
-                description: 'Welcome back!',
+                description: 'Welcome back! Redirecting to dashboard...',
              });
              form.reset();
+             router.push('/dashboard');
         } else {
             form.setError('email', { type: 'manual', message: 'Invalid email or password.' });
             form.setError('password', { type: 'manual', message: 'Invalid email or password.' });
