@@ -27,7 +27,7 @@ export default function EcommerceProjectPage() {
 
       <footer className="bg-secondary text-secondary-foreground mt-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center">
-            <p className="text-sm">&copy; {new Date().getFullYear()} ShopCo. All rights reserved.</p>
+            <p className="text-sm">&copy; {new Date().getFullYear()} StepCampus. All rights reserved.</p>
         </div>
       </footer>
     </div>
