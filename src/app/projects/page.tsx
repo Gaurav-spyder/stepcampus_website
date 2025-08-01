@@ -1,3 +1,4 @@
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Check } from 'lucide-react';
@@ -38,7 +39,7 @@ const projects = [
       'Check radio buttons and checkboxes.',
       'Upload a file and pick a date.',
     ],
-    href: '#',
+    href: '/playground',
   },
   {
     id: 'shopping-cart',
