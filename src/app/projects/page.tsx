@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Check } from 'lucide-react';
+import Link from 'next/link';
 
 const projects = [
   {
@@ -13,6 +14,7 @@ const projects = [
       'Verify "Forgot Password" link functionality.',
       'Verify that user is redirected to the dashboard after login.',
     ],
+    href: '/projects/ecommerce-login',
   },
   {
     id: 'broken-links',
@@ -24,6 +26,7 @@ const projects = [
       'Log links that return a status code of 404 or higher.',
       'Output the results to a CSV or text file.',
     ],
+    href: '#',
   },
   {
     id: 'form-submission',
@@ -35,6 +38,7 @@ const projects = [
       'Check radio buttons and checkboxes.',
       'Upload a file and pick a date.',
     ],
+    href: '#',
   },
   {
     id: 'shopping-cart',
@@ -46,6 +50,7 @@ const projects = [
       'Verify the cart count updates correctly.',
       'Update item quantity in the cart.',
     ],
+    href: '#',
   },
 ];
 
@@ -80,7 +85,9 @@ export default function ProjectsPage() {
                 </ul>
               </CardContent>
               <CardFooter>
-                 <Button variant="outline" className="w-full">View Project</Button>
+                 <Button asChild variant="outline" className="w-full">
+                    <Link href={project.href}>View Project</Link>
+                 </Button>
               </CardFooter>
             </Card>
           ))}
