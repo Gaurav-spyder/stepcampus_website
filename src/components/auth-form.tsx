@@ -1,3 +1,4 @@
+
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -112,13 +113,23 @@ export function AuthForm({ type }: AuthFormProps) {
             form.setError('password', { type: 'manual', message: 'Invalid email or password.' });
         }
     } else {
-        const { captcha: captchaAnswer } = values as z.infer<typeof signupSchema>;
+        const { email, password, captcha: captchaAnswer } = values as z.infer<typeof signupSchema>;
+        let hasError = false;
+
+        if (email !== 'hi@stepcampus.com' || password !== 'Stepcampus@123') {
+            form.setError('email', { type: 'manual', message: 'Invalid email or password.' });
+            form.setError('password', { type: 'manual', message: 'Invalid email or password.' });
+            hasError = true;
+        }
+        
         if (captcha && parseInt(captchaAnswer, 10) !== captcha.answer) {
             form.setError('captcha', { type: 'manual', message: 'Incorrect captcha answer. Try again.' });
             generateCaptcha();
-            return;
+            hasError = true;
         }
-        console.log(values);
+
+        if(hasError) return;
+
         toast({
             title: 'Signup Successful!',
             description: 'You can now log in with your credentials.',
@@ -142,11 +153,12 @@ export function AuthForm({ type }: AuthFormProps) {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          {isLogin && (
+          {(isLogin || !isLogin) && (
             <Alert className="mb-4">
               <Terminal className="h-4 w-4" />
               <AlertTitle>Demo Credentials</AlertTitle>
               <AlertDescription className="text-xs">
+                <p>Use this email and password.</p>
                 <p>Email: <span className="font-mono">hi@stepcampus.com</span></p>
                 <p>Password: <span className="font-mono">Stepcampus@123</span></p>
               </AlertDescription>
