@@ -54,7 +54,7 @@ export default function CheckoutPage() {
                     </div>
                      <div className="space-y-2">
                         <Label htmlFor="card-holder">Card Holder Name</Label>
-                        <Input id="card-holder" placeholder="John Doe" />
+                        <Input id="card-holder" placeholder="stepcampus" />
                     </div>
                     <Button className="w-full" onClick={handlePayment}>
                         Pay Now
