@@ -40,21 +40,21 @@ export default function CheckoutPage() {
                 <CardContent className="space-y-4">
                     <div className="space-y-2">
                         <Label htmlFor="card-number">Card Number</Label>
-                        <Input id="card-number" placeholder="4242 4242 4242 4242" defaultValue="4242 4242 4242 4242" />
+                        <Input id="card-number" placeholder="4242 4242 4242 4242" />
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-2">
                             <Label htmlFor="expiry-date">Expiry Date</Label>
-                            <Input id="expiry-date" placeholder="MM/YY" defaultValue="12/28" />
+                            <Input id="expiry-date" placeholder="MM/YY" />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="cvv">CVV</Label>
-                            <Input id="cvv" placeholder="123" defaultValue="123" />
+                            <Input id="cvv" placeholder="123" />
                         </div>
                     </div>
                      <div className="space-y-2">
                         <Label htmlFor="card-holder">Card Holder Name</Label>
-                        <Input id="card-holder" placeholder="John Doe" defaultValue="John Doe" />
+                        <Input id="card-holder" placeholder="John Doe" />
                     </div>
                     <Button className="w-full" onClick={handlePayment}>
                         Pay Now
