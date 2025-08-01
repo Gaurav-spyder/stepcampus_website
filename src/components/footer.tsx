@@ -5,7 +5,7 @@ import { Logo } from './logo';
 export function Footer() {
   return (
     <footer className="w-full border-t bg-card text-card-foreground">
-      <div className="container grid grid-cols-1 gap-8 px-4 py-12 md:grid-cols-4 md:px-6">
+      <div className="container grid grid-cols-1 gap-8 px-4 py-12 md:grid-cols-3 md:px-6">
         <div className="flex flex-col items-start gap-4">
           <Logo />
           <p className="text-sm text-muted-foreground">
@@ -41,30 +41,6 @@ export function Footer() {
             prefetch={false}
           >
             Projects
-          </Link>
-        </div>
-        <div className="grid gap-2">
-          <h4 className="font-headline font-semibold">Tools Covered</h4>
-          <Link
-            href="/tutorials#selenium"
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-            prefetch={false}
-          >
-            Selenium
-          </Link>
-          <Link
-            href="/tutorials#cypress"
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-            prefetch={false}
-          >
-            Cypress
-          </Link>
-          <Link
-            href="/tutorials#playwright"
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-            prefetch={false}
-          >
-            Playwright
           </Link>
         </div>
         <div className="grid gap-2">
