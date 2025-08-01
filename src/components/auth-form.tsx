@@ -35,7 +35,6 @@ const loginSchema = z.object({
 });
 
 const signupSchema = z.object({
-  username: z.string().min(2, { message: 'Username must be at least 2 characters.' }),
   email: z.string().email({ message: 'Invalid email address.' }),
   password: z
     .string()
@@ -93,7 +92,7 @@ export function AuthForm({ type }: AuthFormProps) {
     resolver: zodResolver(formSchema),
     defaultValues: isLogin
       ? { email: '', password: '' }
-      : { username: '', email: '', password: '', captcha: '' },
+      : { email: '', password: '', captcha: '' },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -152,21 +151,6 @@ export function AuthForm({ type }: AuthFormProps) {
           )}
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              {!isLogin && (
-                <FormField
-                  control={form.control}
-                  name="username"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Username</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Your username" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              )}
               <FormField
                 control={form.control}
                 name="email"
