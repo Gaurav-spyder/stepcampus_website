@@ -175,7 +175,9 @@ export default function ShoppingCartProjectPage() {
                                     <p>Total</p>
                                     <p>${cartTotal.toFixed(2)}</p>
                                 </div>
-                                <Button className="w-full">Proceed to Checkout</Button>
+                                <Button asChild className="w-full">
+                                    <Link href="/projects/shopping-cart/checkout">Proceed to Checkout</Link>
+                                </Button>
                             </div>
                         )}
                     </CardContent>
@@ -186,4 +188,3 @@ export default function ShoppingCartProjectPage() {
     </div>
   );
 }
-
