@@ -102,7 +102,6 @@ export default function PlaygroundPage() {
 
 
   React.useEffect(() => {
-    // This now correctly runs only on the client
     const today = new Date();
     setDate(today);
     setDateInput(format(today, 'dd/MM/yyyy'));
@@ -116,7 +115,7 @@ export default function PlaygroundPage() {
       setDate(parsedDate);
     }
   };
-  
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     setKeyboardLog(prev => [`Key down: ${e.key}`, ...prev].slice(0, 5));
   };
@@ -659,7 +658,7 @@ export default function PlaygroundPage() {
             <CardHeader><CardTitle className="font-headline">Window/Tab</CardTitle></CardHeader>
             <CardContent>
                 <Button asChild className="w-full">
-                    <Link href="/" target="_blank">Open Home in New Tab</Link>
+                    <a href="https://www.selenium.dev/" target="_blank" rel="noopener noreferrer">Open Selenium Docs in New Tab</a>
                 </Button>
                 <p className="mt-2 text-sm text-muted-foreground">Click the button to test handling new browser tabs.</p>
             </CardContent>
