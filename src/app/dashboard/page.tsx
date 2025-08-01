@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
+import { LogOut } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Dashboard',
@@ -19,8 +19,8 @@ export default function DashboardPage() {
         <div className="absolute top-0 right-0">
             <Button asChild>
                 <Link href="/login">
-                    <ArrowLeft className="mr-2 h-4 w-4" />
-                    Back to Login
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Logout
                 </Link>
             </Button>
         </div>
