@@ -393,7 +393,7 @@ export default function PlaygroundPage() {
         </Card>
         
         {/* Tables */}
-        <Card className="lg:col-span-2">
+        <Card className="md:col-span-2 lg:col-span-3">
           <CardHeader>
             <CardTitle className="font-headline">Web Tables</CardTitle>
           </CardHeader>
