@@ -100,6 +100,7 @@ export default function PlaygroundPage() {
 
 
   React.useEffect(() => {
+    // This now correctly runs only on the client
     setDate(new Date());
   }, []);
 
@@ -137,10 +138,6 @@ export default function PlaygroundPage() {
   const logClick = (message: string) => {
     setClickLog(prev => [message, ...prev].slice(0,5));
   }
-
-  const handleShowAlert = React.useCallback(() => {
-    alert('This is a simple JavaScript alert.');
-  }, []);
 
   const nestedFrameContent = `
     <body style="background-color: #E0E8F0; border: 2px solid #29ABE2; border-radius: 8px; padding: 1rem; font-family: sans-serif;">
@@ -292,13 +289,13 @@ export default function PlaygroundPage() {
             <CardTitle className="font-headline">Popups & Alerts</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <Button
-              variant="outline"
-              className="w-full"
-              onClick={handleShowAlert}
-            >
-              Show JS Alert
-            </Button>
+             <Alert>
+              <AlertCircle className="h-4 w-4" />
+              <AlertTitle>Informational Alert</AlertTitle>
+              <AlertDescription>
+                This is a standard alert component.
+              </AlertDescription>
+            </Alert>
             <AlertDialog>
               <AlertDialogTrigger asChild>
                 <Button variant="outline" className="w-full">
