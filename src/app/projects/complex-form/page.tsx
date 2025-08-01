@@ -42,6 +42,10 @@ export default function ComplexFormProjectPage() {
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: '',
+            gender: undefined,
+            sport: '',
+            file: null,
+            date: ''
         },
     });
 
