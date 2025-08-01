@@ -67,7 +67,7 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
-import { format } from 'date-fns';
+import { format, parse } from 'date-fns';
 import React from 'react';
 import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
@@ -88,44 +88,33 @@ export default function PlaygroundPage() {
   const { toast } = useToast();
   const [hideElement, setHideElement] = React.useState(false);
   const [date, setDate] = React.useState<Date | undefined>(undefined);
+  const [dateInput, setDateInput] = React.useState('');
   const [openCombobox, setOpenCombobox] = React.useState(false);
   const [comboboxValue, setComboboxValue] = React.useState('');
   const [keyboardLog, setKeyboardLog] = React.useState<string[]>([]);
   const [clickLog, setClickLog] = React.useState<string[]>([]);
+  const [toggleState, setToggleState] = React.useState(false);
+  const [sliderValue, setSliderValue] = React.useState([50]);
 
   const [isDragging, setIsDragging] = React.useState(false);
-  const [position, setPosition] = React.useState({ x: 0, y: 0 });
-  const [offset, setOffset] = React.useState({ x: 0, y: 0 });
-  const dragRef = React.useRef<HTMLDivElement>(null);
-  const [toggleState, setToggleState] = React.useState(false);
+  const [draggedItem, setDraggedItem] = React.useState<string | null>(null);
+  const [isDropped, setIsDropped] = React.useState(false);
 
 
   React.useEffect(() => {
     // This now correctly runs only on the client
-    setDate(new Date());
+    const today = new Date();
+    setDate(today);
+    setDateInput(format(today, 'MM/dd/yyyy'));
   }, []);
 
-  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (dragRef.current) {
-        setIsDragging(true);
-        setOffset({
-            x: e.clientX - dragRef.current.offsetLeft,
-            y: e.clientY - dragRef.current.offsetTop,
-        });
+  const handleDateInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setDateInput(value);
+    const parsedDate = parse(value, 'MM/dd/yyyy', new Date());
+    if (!isNaN(parsedDate.getTime())) {
+      setDate(parsedDate);
     }
-  };
-  
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-      if (isDragging) {
-          setPosition({
-              x: e.clientX - offset.x,
-              y: e.clientY - offset.y,
-          });
-      }
-  };
-
-  const handleMouseUp = () => {
-      setIsDragging(false);
   };
   
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -159,6 +148,29 @@ export default function PlaygroundPage() {
       ></iframe>
     </body>
   `;
+
+  const handleDragStart = (e: React.DragEvent<HTMLDivElement>, item: string) => {
+    e.dataTransfer.setData('text/plain', item);
+    setDraggedItem(item);
+    setIsDragging(true);
+  };
+
+  const handleDragEnd = () => {
+    setIsDragging(false);
+    setDraggedItem(null);
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    const item = e.dataTransfer.getData('text/plain');
+    if(item === 'draggable') {
+      setIsDropped(true);
+    }
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  };
 
   return (
     <div className="container py-12">
@@ -554,21 +566,44 @@ export default function PlaygroundPage() {
         </Card>
         
         {/* Drag and Drop */}
-        <Card onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onMouseLeave={handleMouseUp} className="overflow-hidden">
+        <Card>
             <CardHeader><CardTitle>Drag and Drop</CardTitle></CardHeader>
-            <CardContent>
-                <div className="relative h-48 w-full rounded-md border-2 border-dashed">
-                    <div
-                        ref={dragRef}
-                        onMouseDown={handleMouseDown}
-                        className={cn(
-                          "absolute p-2 bg-primary text-primary-foreground rounded-lg shadow-lg transition-all duration-75",
-                          isDragging ? 'cursor-grabbing scale-105 shadow-2xl' : 'cursor-grab'
-                        )}
-                        style={{ left: `${position.x}px`, top: `${position.y}px` }}
-                    >
-                       <Move className="h-5 w-5 inline-block mr-2" /> Drag me
-                    </div>
+            <CardContent className="grid grid-cols-2 gap-4">
+                <div
+                    id="source-container"
+                    className="h-48 w-full rounded-md border-2 border-dashed flex items-center justify-center"
+                    onDragOver={handleDragOver}
+                    onDrop={handleDrop}
+                >
+                    {!isDropped && (
+                        <div
+                            id="draggable"
+                            draggable
+                            onDragStart={(e) => handleDragStart(e, 'draggable')}
+                            onDragEnd={handleDragEnd}
+                            className={cn(
+                                "p-2 bg-primary text-primary-foreground rounded-lg shadow-lg transition-all duration-75 flex items-center gap-2",
+                                isDragging ? 'cursor-grabbing scale-105 shadow-2xl opacity-50' : 'cursor-grab'
+                            )}
+                        >
+                           <Move className="h-5 w-5" /> Drag me
+                        </div>
+                    )}
+                </div>
+                <div
+                    id="target-container"
+                    className={cn(
+                        "h-48 w-full rounded-md border-2 border-dashed flex items-center justify-center transition-colors",
+                         isDropped ? 'bg-green-100 border-green-500' : ''
+                    )}
+                    onDragOver={handleDragOver}
+                    onDrop={handleDrop}
+                >
+                    {isDropped ? (
+                        <div className="text-green-700 font-bold p-2 bg-green-200 rounded-lg">Dropped!</div>
+                    ) : (
+                        <span className="text-muted-foreground">Drop here</span>
+                    )}
                 </div>
             </CardContent>
         </Card>
@@ -576,8 +611,9 @@ export default function PlaygroundPage() {
         {/* Slider */}
          <Card>
             <CardHeader><CardTitle>Slider</CardTitle></CardHeader>
-            <CardContent>
-                <Slider defaultValue={[50]} max={100} step={1} />
+            <CardContent className="space-y-2">
+                <Slider value={sliderValue} onValueChange={setSliderValue} max={100} step={1} />
+                <p className="text-center text-sm text-muted-foreground">Value: {sliderValue[0]}%</p>
             </CardContent>
         </Card>
 
@@ -588,24 +624,31 @@ export default function PlaygroundPage() {
             <CardContent>
                 <Popover>
                     <PopoverTrigger asChild>
-                    <Button
+                      <Button
                         variant={"outline"}
                         className={cn(
-                        "w-full justify-start text-left font-normal",
-                        !date && "text-muted-foreground"
+                          "w-full justify-start text-left font-normal",
+                          !date && "text-muted-foreground"
                         )}
-                    >
+                      >
                         <CalendarIcon className="mr-2 h-4 w-4" />
                         {date ? format(date, "PPP") : <span>Pick a date</span>}
-                    </Button>
+                      </Button>
                     </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0">
-                    <Calendar
-                        mode="single"
-                        selected={date}
-                        onSelect={setDate}
-                        initialFocus
-                    />
+                    <PopoverContent className="w-auto p-0 space-y-2">
+                      <Input
+                        type="text"
+                        placeholder="MM/DD/YYYY"
+                        value={dateInput}
+                        onChange={handleDateInputChange}
+                        className="m-2 w-[calc(100%-1rem)]"
+                      />
+                      <Calendar
+                          mode="single"
+                          selected={date}
+                          onSelect={setDate}
+                          initialFocus
+                      />
                     </PopoverContent>
                 </Popover>
             </CardContent>
