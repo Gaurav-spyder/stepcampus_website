@@ -11,6 +11,13 @@ const tutorials = [
     imageUrl: 'https://placehold.co/600x400.png',
     imageHint: 'automation testing',
   },
+  {
+    title: 'Playwright Full Course',
+    description: 'Learn Playwright for end-to-end testing from the ground up.',
+    href: 'https://www.youtube.com/playlist?list=PL-J2q3Ga50oMQa141hA_Uq_5-s_7o7n7l',
+    imageUrl: 'https://placehold.co/600x400.png',
+    imageHint: 'e2e testing',
+  },
 ];
 
 export default function TutorialsPage() {
@@ -25,7 +32,7 @@ export default function TutorialsPage() {
         </p>
       </div>
 
-      <div className="mx-auto max-w-2xl">
+      <div className="mx-auto grid max-w-2xl gap-8">
         {tutorials.map((tutorial) => (
           <Card key={tutorial.title} className="overflow-hidden">
              <Link href={tutorial.href} target="_blank" rel="noopener noreferrer">
