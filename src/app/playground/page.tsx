@@ -95,18 +95,23 @@ export default function PlaygroundPage() {
     setKeyboardLog(prev => [...prev, `Key up: ${e.key}`].slice(-5));
   };
   
-  const frameContent = `
-    <body style="background-color: #F0F4F8; padding: 1rem; font-family: sans-serif;">
-      <h3 style="color: #000;">Outer Frame</h3>
-      <p style="color: #555;">This is the content of the outer iframe.</p>
-    </body>
-  `;
-  
   const nestedFrameContent = `
     <body style="background-color: #E0E8F0; border: 2px solid #29ABE2; border-radius: 8px; padding: 1rem; font-family: sans-serif;">
       <h3 style="color: #000;">Nested Frame</h3>
       <p style="color: #555;">This is the content of the nested iframe.</p>
       <button onclick="alert('Button in nested frame clicked!')" style="padding: 8px 12px; border-radius: 4px; background-color: #9C27B0; color: white; border: none; cursor: pointer;">Click me</button>
+    </body>
+  `;
+
+  const frameContent = `
+    <body style="background-color: #F0F4F8; padding: 1rem; font-family: sans-serif;">
+      <h3 style="color: #000;">Outer Frame</h3>
+      <p style="color: #555;">This is the content of the outer iframe.</p>
+      <iframe
+        title="Nested Frame"
+        srcDoc="${nestedFrameContent.replace(/"/g, '&quot;')}"
+        style="width: 100%; height: 100px; border-radius: 8px; border: 1px solid #ccc;"
+      ></iframe>
     </body>
   `;
 
@@ -371,13 +376,8 @@ export default function PlaygroundPage() {
             <iframe
               title="Outer Frame"
               srcDoc={frameContent}
-              className="w-full h-32 rounded-md border"
+              className="w-full h-48 rounded-md border"
             >
-                <iframe
-                    title="Nested Frame"
-                    srcDoc={nestedFrameContent}
-                    className="w-full h-24 rounded-md border"
-                ></iframe>
             </iframe>
             <p className="mt-2 text-sm text-muted-foreground">The element above is an iframe containing a nested iframe.</p>
           </CardContent>
