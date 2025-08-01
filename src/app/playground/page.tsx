@@ -289,30 +289,22 @@ export default function PlaygroundPage() {
             <CardTitle className="font-headline">Popups & Alerts</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-             <Alert>
-              <AlertCircle className="h-4 w-4" />
-              <AlertTitle>Informational Alert</AlertTitle>
-              <AlertDescription>
-                This is a standard alert component.
-              </AlertDescription>
-            </Alert>
-            <AlertDialog>
+             <AlertDialog>
               <AlertDialogTrigger asChild>
                 <Button variant="outline" className="w-full">
-                  Show Confirmation
+                  Show Alert
                 </Button>
               </AlertDialogTrigger>
               <AlertDialogContent>
                 <AlertDialogHeader>
-                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                  <AlertDialogTitle>This is an alert!</AlertDialogTitle>
                   <AlertDialogDescription>
-                    This action cannot be undone. This will permanently delete
-                    your account and remove your data from our servers.
+                    You can use this to confirm user actions.
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                   <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction>Continue</AlertDialogAction>
+                  <AlertDialogAction>OK</AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
