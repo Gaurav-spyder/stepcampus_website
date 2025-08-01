@@ -34,7 +34,7 @@ export function Header() {
         </div>
 
         <nav className="hidden items-center gap-6 text-sm font-medium md:flex">
-          {navLinks.map((link) => (
+          {isClient && navLinks.map((link) => (
             <Link
               key={`${link.href}-${link.label}`}
               href={link.href}
