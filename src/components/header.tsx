@@ -12,7 +12,6 @@ import { Logo } from './logo';
 const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/playground', label: 'Playground' },
-  { href: '/tutorials', label: 'Tutorials' },
   { href: '/projects', label: 'Projects' },
   { href: '/contact', label: 'Contact' },
 ];
