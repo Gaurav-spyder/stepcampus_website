@@ -130,12 +130,7 @@ export function AuthForm({ type }: AuthFormProps) {
 
         if(hasError) return;
 
-        toast({
-            title: 'Signup Successful!',
-            description: 'You can now log in with your credentials.',
-        });
-        form.reset();
-        generateCaptcha();
+        router.push('/signup-success');
     }
   }
 
@@ -153,8 +148,7 @@ export function AuthForm({ type }: AuthFormProps) {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          {(isLogin || !isLogin) && (
-            <Alert className="mb-4">
+          <Alert className="mb-4">
               <Terminal className="h-4 w-4" />
               <AlertTitle>Demo Credentials</AlertTitle>
               <AlertDescription className="text-xs">
@@ -162,8 +156,7 @@ export function AuthForm({ type }: AuthFormProps) {
                 <p>Email: <span className="font-mono">hi@stepcampus.com</span></p>
                 <p>Password: <span className="font-mono">Stepcampus@123</span></p>
               </AlertDescription>
-            </Alert>
-          )}
+          </Alert>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <FormField
