@@ -557,7 +557,7 @@ export default function PlaygroundPage() {
         <Card>
           <CardHeader>
             <CardTitle className="font-headline">User Interactions</CardTitle>
-          </Header>
+          </CardHeader>
           <CardContent className="space-y-6">
             <div className="space-y-2">
                 <Label>Mouse Hover</Label>
@@ -749,5 +749,3 @@ export default function PlaygroundPage() {
     </div>
   );
 }
-
-    
