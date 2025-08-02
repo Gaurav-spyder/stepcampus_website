@@ -48,13 +48,6 @@ import {
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import {
   Table,
   TableBody,
   TableCell,
@@ -91,8 +84,6 @@ export default function PlaygroundPage() {
   const [hideElement, setHideElement] = React.useState(false);
   const [date, setDate] = React.useState<Date | undefined>(undefined);
   const [dateInput, setDateInput] = React.useState('');
-  const [openCombobox, setOpenCombobox] = React.useState(false);
-  const [comboboxValue, setComboboxValue] = React.useState('');
   const [keyboardLog, setKeyboardLog] = React.useState<string[]>([]);
   const [clickLog, setClickLog] = React.useState<string[]>([]);
   const [toggleState, setToggleState] = React.useState(false);
@@ -258,67 +249,26 @@ export default function PlaygroundPage() {
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="space-y-2">
-              <Label>Standard Dropdown</Label>
-              <Select>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select a fruit" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="apple">Apple</SelectItem>
-                  <SelectItem value="banana">Banana</SelectItem>
-                  <SelectItem value="blueberry">Blueberry</SelectItem>
-                  <SelectItem value="grapes">Grapes</SelectItem>
-                  <SelectItem value="pineapple">Pineapple</SelectItem>
-                </SelectContent>
-              </Select>
+              <Label htmlFor="fruit-select">Standard Dropdown</Label>
+              <select id="fruit-select" className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
+                <option value="">Select a fruit</option>
+                <option value="apple">Apple</option>
+                <option value="banana">Banana</option>
+                <option value="blueberry">Blueberry</option>
+                <option value="grapes">Grapes</option>
+                <option value="pineapple">Pineapple</option>
+              </select>
             </div>
             <div className="space-y-2">
-              <Label>Suggestive Dropdown (Combobox)</Label>
-              <Popover open={openCombobox} onOpenChange={setOpenCombobox}>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    role="combobox"
-                    aria-expanded={openCombobox}
-                    className="w-full justify-between"
-                  >
-                    {comboboxValue
-                      ? frameworks.find((f) => f.value === comboboxValue)?.label
-                      : 'Select framework...'}
-                    <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-[--radix-popover-trigger-width] p-0">
-                  <Command>
-                    <CommandInput placeholder="Search framework..." />
-                    <CommandEmpty>No framework found.</CommandEmpty>
-                    <CommandList>
-                      <CommandGroup>
-                        {frameworks.map((framework) => (
-                          <CommandItem
-                            key={framework.value}
-                            value={framework.value}
-                            onSelect={(currentValue) => {
-                              setComboboxValue(currentValue === comboboxValue ? '' : currentValue);
-                              setOpenCombobox(false);
-                            }}
-                          >
-                            <Check
-                              className={cn(
-                                'mr-2 h-4 w-4',
-                                comboboxValue === framework.value
-                                  ? 'opacity-100'
-                                  : 'opacity-0'
-                              )}
-                            />
-                            {framework.label}
-                          </CommandItem>
-                        ))}
-                      </CommandGroup>
-                    </CommandList>
-                  </Command>
-                </PopoverContent>
-              </Popover>
+              <Label htmlFor="framework-select">Suggestive Dropdown</Label>
+                <select id="framework-select" className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
+                    <option value="">Select framework...</option>
+                    {frameworks.map((framework) => (
+                      <option key={framework.value} value={framework.value}>
+                        {framework.label}
+                      </option>
+                    ))}
+              </select>
             </div>
           </CardContent>
         </Card>
