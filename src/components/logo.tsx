@@ -14,9 +14,9 @@ export function Logo() {
         <circle cx="24" cy="24" r="22" fill="#FFD700" />
         <text
             x="24"
-            y="28"
+            y="27"
             fontFamily="Space Grotesk, sans-serif"
-            fontSize="8"
+            fontSize="10"
             fontWeight="bold"
             fill="#0F172A"
             textAnchor="middle"
