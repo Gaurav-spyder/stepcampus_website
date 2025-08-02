@@ -12,7 +12,8 @@ import {
   Upload,
   ChevronsUpDown,
   Move,
-  Clock
+  Clock,
+  MessageSquare,
 } from 'lucide-react';
 import {
   AlertDialog,
@@ -110,6 +111,10 @@ export default function PlaygroundPage() {
 
   const [openCombobox, setOpenCombobox] = React.useState(false);
   const [comboboxValue, setComboboxValue] = React.useState('');
+  
+  const [alertInputValue, setAlertInputValue] = React.useState('');
+  const [alertAcceptedValue, setAlertAcceptedValue] = React.useState('');
+
 
   React.useEffect(() => {
     if (!isTimerActive) return;
@@ -154,6 +159,10 @@ export default function PlaygroundPage() {
   const logClick = (message: string) => {
     setClickLog(prev => [message, ...prev].slice(0,5));
   }
+
+  const handleAlertAccept = () => {
+    setAlertAcceptedValue(`You entered: ${alertInputValue}`);
+  };
 
   const nestedFrameContent = `
     <body style="background-color: #E0E8F0; border: 2px solid #29ABE2; border-radius: 8px; padding: 1rem; font-family: sans-serif;">
@@ -347,17 +356,38 @@ export default function PlaygroundPage() {
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
-            <Button
-              className="w-full"
-              onClick={() =>
-                toast({
-                  title: 'Heads up!',
-                  description: 'This is a toast notification.',
-                })
-              }
-            >
-              Show Toast Notification
-            </Button>
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button className="w-full">Alert with Text</Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Enter some text</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This action will be recorded after you click OK.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <Input 
+                  id="alert-text-input"
+                  placeholder="Type here..."
+                  value={alertInputValue}
+                  onChange={(e) => setAlertInputValue(e.target.value)}
+                />
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction onClick={handleAlertAccept}>OK</AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+            {alertAcceptedValue && (
+                <Alert className="mt-4 text-left">
+                    <MessageSquare className="h-4 w-4" />
+                    <AlertTitle>Result</AlertTitle>
+                    <AlertDescription>
+                        {alertAcceptedValue}
+                    </AlertDescription>
+                </Alert>
+            )}
           </CardContent>
         </Card>
 
