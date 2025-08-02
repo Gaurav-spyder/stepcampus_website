@@ -110,14 +110,16 @@ export default function ShoppingCartProjectPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                     {filteredProducts.map(product => (
                         <Card key={product.id} className="flex flex-col">
-                            <CardHeader className="p-0 relative aspect-video">
-                                <Image
-                                    src={product.imageUrl}
-                                    alt={product.name}
-                                    fill
-                                    className="w-full object-cover rounded-t-lg"
-                                    data-ai-hint={product.imageHint}
-                                />
+                            <CardHeader className="p-0">
+                                <div className="relative aspect-video">
+                                    <Image
+                                        src={product.imageUrl}
+                                        alt={product.name}
+                                        fill
+                                        className="w-full object-cover rounded-t-lg"
+                                        data-ai-hint={product.imageHint}
+                                    />
+                                </div>
                             </CardHeader>
                             <CardContent className="p-4 flex-1">
                                 <h3 className="font-semibold">{product.name}</h3>
