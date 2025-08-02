@@ -176,7 +176,7 @@ export default function ShoppingCartProjectPage() {
                                     <p>Total</p>
                                     <p>${cartTotal.toFixed(2)}</p>
                                 </div>
-                                <Button asChild className="w-full">
+                                <Button asChild className="w-full" disabled={cart.length === 0}>
                                     <Link href="/projects/shopping-cart/checkout">Proceed to Checkout</Link>
                                 </Button>
                             </div>
