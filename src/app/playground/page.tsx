@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import {
@@ -69,6 +70,12 @@ import Link from 'next/link';
 import { Switch } from '@/components/ui/switch';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Slider } from '@/components/ui/slider';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
 
 
 const countries = [
@@ -551,7 +558,7 @@ export default function PlaygroundPage() {
         <Card>
           <CardHeader>
             <CardTitle className="font-headline">User Interactions</CardTitle>
-          </CardHeader>
+          </Header>
           <CardContent className="space-y-6">
             <div className="space-y-2">
                 <Label>Mouse Hover</Label>
@@ -587,6 +594,33 @@ export default function PlaygroundPage() {
                     <li>Third item</li>
                     <li>Fourth item</li>
                 </ul>
+            </CardContent>
+        </Card>
+
+        {/* Accordion */}
+        <Card>
+            <CardHeader><CardTitle>Accordion</CardTitle></CardHeader>
+            <CardContent>
+                <Accordion type="single" collapsible className="w-full">
+                    <AccordionItem value="item-1">
+                        <AccordionTrigger>Section 1</AccordionTrigger>
+                        <AccordionContent>
+                            This is the content of the first section. You can test clicking the trigger to expand it.
+                        </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="item-2">
+                        <AccordionTrigger>Section 2</AccordionTrigger>
+                        <AccordionContent>
+                            This is the content of the second section. Your script should be able to handle multiple items.
+                        </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="item-3">
+                        <AccordionTrigger>Section 3</AccordionTrigger>
+                        <AccordionContent>
+                            This is the content of the third section. Ensure your automation can verify this text.
+                        </AccordionContent>
+                    </AccordionItem>
+                </Accordion>
             </CardContent>
         </Card>
         
@@ -681,7 +715,7 @@ export default function PlaygroundPage() {
                     </PopoverContent>
                 </Popover>
             </CardContent>
-        </Card>
+        </card>
 
          {/* Window/Tab Management */}
          <Card>
@@ -712,12 +746,7 @@ export default function PlaygroundPage() {
             )}
           </CardContent>
         </Card>
-
-
       </div>
     </div>
   );
-
-    
-
 }
