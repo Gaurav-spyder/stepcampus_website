@@ -116,7 +116,7 @@ export default function ShoppingCartProjectPage() {
                                         src={product.imageUrl}
                                         alt={product.name}
                                         fill
-                                        className="w-full object-cover rounded-t-lg"
+                                        className="object-cover rounded-t-lg"
                                         data-ai-hint={product.imageHint}
                                     />
                                 </div>
