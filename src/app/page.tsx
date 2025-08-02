@@ -1,3 +1,4 @@
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { CheckCircle, FlaskConical, BookOpen, Code2 } from 'lucide-react';
@@ -13,7 +14,7 @@ const features = [
   {
     icon: <BookOpen className="h-10 w-10 text-primary" />,
     title: 'In-Depth Tutorials',
-    description: 'Learn Selenium, Cypress, and Playwright from scratch with our guides.',
+    description: 'Learn Selenium, Appium, and API from scratch with our guides.',
     href: '/tutorials',
   },
   {
