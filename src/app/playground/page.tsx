@@ -216,7 +216,9 @@ export default function PlaygroundPage() {
                         checked={toggleState}
                         onCheckedChange={setToggleState}
                     />
-                    <Label htmlFor="airplane-mode">{toggleState ? 'ON' : 'OFF'}</Label>
+                    <Label htmlFor="airplane-mode" className="w-10 text-center font-bold">
+                        {toggleState ? 'ON' : 'OFF'}
+                    </Label>
                 </div>
             </div>
           </CardContent>
