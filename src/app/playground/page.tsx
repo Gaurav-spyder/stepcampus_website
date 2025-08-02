@@ -492,7 +492,7 @@ export default function PlaygroundPage() {
           <CardContent className="space-y-4">
             <div>
               <Label>Vertical Scroll</Label>
-              <ScrollArea className="h-40 w-full rounded-md border p-4">
+              <ScrollArea className="h-40 w-full rounded-md border p-4" type="always">
                 <p className="mb-4">
                   Jokester began sneaking into the castle in the middle of the night
                   and leaving jokes all over the place: under the king's pillow, in
@@ -512,7 +512,7 @@ export default function PlaygroundPage() {
             </div>
             <div>
                 <Label>Horizontal Scroll</Label>
-                <ScrollArea className="w-full whitespace-nowrap rounded-md border">
+                <ScrollArea className="w-full whitespace-nowrap rounded-md border" type="always">
                     <div className="flex w-max space-x-4 p-4">
                         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(i => (
                              <Card key={i}><CardContent className="p-6">Card {i}</CardContent></Card>
