@@ -12,13 +12,6 @@ const tutorials = [
     imageUrl: 'https://placehold.co/600x400.png',
     imageHint: 'automation testing',
   },
-  {
-    title: 'Appium Full Course',
-    description: 'Learn mobile automation from scratch with this complete Appium playlist.',
-    href: 'https://youtube.com/playlist?list=PLfYPqIerSaIVdK0t7sR1622L5i0s8-y7E&si=bE4b6i4eYtZbY0H0',
-    imageUrl: 'https://placehold.co/600x400.png',
-    imageHint: 'mobile automation',
-  },
 ];
 
 export default function TutorialsPage() {
