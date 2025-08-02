@@ -493,7 +493,7 @@ export default function PlaygroundPage() {
             <div>
               <Label>Vertical Scroll</Label>
               <ScrollArea className="h-40 w-full rounded-md border p-4">
-                <p>
+                <p className="mb-4">
                   Jokester began sneaking into the castle in the middle of the night
                   and leaving jokes all over the place: under the king's pillow, in
                   his soup, even in the royal toilet. The king was furious, but he
@@ -502,13 +502,19 @@ export default function PlaygroundPage() {
                   good that they couldn't help but laugh. And once they started
                   laughing, they couldn't stop.
                 </p>
+                <p className="mb-4">
+                  The laughter spread throughout the kingdom like wildfire. It was so contagious that even the guards in the stoic royal guard started cracking smiles. The kingdom, once grim and silent, was now filled with the sound of joy. The king, initially annoyed, found himself chuckling at a particularly clever limerick he found in his crown.
+                </p>
+                <p>
+                  Realizing the positive change, the king declared Jokester the official Royal Jester. The pranks continued, but now they were celebrated. The kingdom of Somberland was renamed the Kingdom of Chuckles, a testament to how a little humor can change everything. And they all lived happily, and hilariously, ever after.
+                </p>
               </ScrollArea>
             </div>
             <div>
                 <Label>Horizontal Scroll</Label>
                 <ScrollArea className="w-full whitespace-nowrap rounded-md border">
                     <div className="flex w-max space-x-4 p-4">
-                        {[1, 2, 3, 4, 5, 6, 7, 8].map(i => (
+                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(i => (
                              <Card key={i}><CardContent className="p-6">Card {i}</CardContent></Card>
                         ))}
                     </div>
