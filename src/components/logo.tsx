@@ -4,22 +4,44 @@ import Link from 'next/link';
 export function Logo() {
   return (
     <Link href="/" className="flex items-center gap-2" prefetch={false}>
-      <svg
+       <svg
         width="48"
         height="48"
-        viewBox="0 0 100 100"
+        viewBox="0 0 48 48"
+        fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="h-12 w-12"
       >
-        <circle cx="50" cy="50" r="48" fill="#FFD700" stroke="#000000" strokeWidth="2" />
-        <path d="M20 40 L50 30 L80 40 L50 50 Z" fill="#4A4A4A"/>
-        <path d="M45 50 L55 50 L55 55 L45 55 Z" fill="#333333"/>
-        <rect x="48" y="30" width="4" height="5" fill="#4A4A4A" />
-        <path d="M78 40 L78 55 L75 53" stroke="#FFC107" strokeWidth="2" fill="none" />
-        <text x="50" y="68" fontFamily="Arial, sans-serif" fontSize="16" fill="#000000" textAnchor="middle" fontWeight="bold">Step</text>
-        <text x="50" y="85" fontFamily="Arial, sans-serif" fontSize="16" fill="#000000" textAnchor="middle" fontWeight="bold">Campus</text>
+        <circle cx="24" cy="24" r="22" fill="#FFD700" />
+        <path
+          d="M12 28L24 22L36 28L24 34L12 28Z"
+          stroke="#333"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M36 21V28"
+          stroke="#333"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M24 16V22"
+          stroke="#333"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M18 25L12 28"
+          stroke="#333"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
       </svg>
-      <span className="text-xl font-headline font-bold text-foreground">
+      <span className="text-2xl font-headline font-bold text-foreground">
         StepCampus
       </span>
     </Link>
