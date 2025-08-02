@@ -101,7 +101,7 @@ export function AuthForm({ type }: AuthFormProps) {
   function onSubmit(values: z.infer<typeof formSchema>) {
     if (isLogin) {
         const { email, password } = values as z.infer<typeof loginSchema>;
-        if (email === 'hi@stepcampus.com' && password === 'Stepcampus@123') {
+        if (email === 'hi@stepcampus.in' && password === 'Stepcampus@123') {
              toast({
                 title: 'Login Successful!',
                 description: 'Welcome back! Redirecting to dashboard...',
@@ -116,7 +116,7 @@ export function AuthForm({ type }: AuthFormProps) {
         const { email, password, captcha: captchaAnswer } = values as z.infer<typeof signupSchema>;
         let hasError = false;
 
-        if (email !== 'hi@stepcampus.com' || password !== 'Stepcampus@123') {
+        if (email !== 'hi@stepcampus.in' || password !== 'Stepcampus@123') {
             form.setError('email', { type: 'manual', message: 'Invalid email or password.' });
             form.setError('password', { type: 'manual', message: 'Invalid email or password.' });
             hasError = true;
@@ -153,7 +153,7 @@ export function AuthForm({ type }: AuthFormProps) {
               <AlertTitle>Demo Credentials</AlertTitle>
               <AlertDescription className="text-xs">
                 <p>Use this email and password.</p>
-                <p>Email: <span className="font-mono">hi@stepcampus.com</span></p>
+                <p>Email: <span className="font-mono">hi@stepcampus.in</span></p>
                 <p>Password: <span className="font-mono">Stepcampus@123</span></p>
               </AlertDescription>
           </Alert>
@@ -168,7 +168,7 @@ export function AuthForm({ type }: AuthFormProps) {
                     <FormControl>
                       <Input
                         type="email"
-                        placeholder="m@stepcampus.com"
+                        placeholder="m@stepcampus.in"
                         {...field}
                       />
                     </FormControl>

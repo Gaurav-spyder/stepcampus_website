@@ -1,3 +1,4 @@
+
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -99,7 +100,7 @@ export default function ContactPage() {
                     <FormItem>
                       <FormLabel>Email</FormLabel>
                       <FormControl>
-                        <Input placeholder="your.email@stepcampus.com" {...field} />
+                        <Input placeholder="your.email@stepcampus.in" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>

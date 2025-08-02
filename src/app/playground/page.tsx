@@ -419,19 +419,19 @@ export default function PlaygroundPage() {
                 <TableRow>
                   <TableCell>John Doe</TableCell>
                   <TableCell>Software Engineer</TableCell>
-                  <TableCell>john.doe@stepcampus.com</TableCell>
+                  <TableCell>john.doe@stepcampus.in</TableCell>
                   <TableCell>Member</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>Jane Smith</TableCell>
                   <TableCell>Project Manager</TableCell>
-                  <TableCell>jane.smith@stepcampus.com</TableCell>
+                  <TableCell>jane.smith@stepcampus.in</TableCell>
                   <TableCell>Admin</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>Sam Brown</TableCell>
                   <TableCell>UI/UX Designer</TableCell>
-                  <TableCell>sam.brown@stepcampus.com</TableCell>
+                  <TableCell>sam.brown@stepcampus.in</TableCell>
                   <TableCell>Member</TableCell>
                 </TableRow>
               </TableBody>
