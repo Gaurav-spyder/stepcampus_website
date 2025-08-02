@@ -568,30 +568,30 @@ export default function PlaygroundPage() {
         </Card>
         
         {/* Drag and Drop */}
-        <Card>
+        <Card className="lg:col-span-2">
             <CardHeader><CardTitle>Drag and Drop</CardTitle></CardHeader>
-            <CardContent className="grid grid-cols-2 gap-4">
+            <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div
                     id="source-container"
-                    className="h-48 w-full rounded-lg border-2 border-dashed flex flex-col items-center justify-center p-4"
-                    onDragOver={handleDragOver}
-                    onDrop={handleDrop}
+                    className="h-48 w-full rounded-lg border-2 border-dashed flex flex-col items-center justify-center p-4 bg-muted/20"
                 >
                     <p className="text-sm font-semibold mb-2">Drag From Here</p>
-                    {!isDropped && (
-                        <div
-                            id="draggable"
-                            draggable
-                            onDragStart={(e) => handleDragStart(e, 'draggable')}
-                            onDragEnd={handleDragEnd}
-                            className={cn(
-                                "p-4 bg-primary text-primary-foreground rounded-lg shadow-lg transition-all duration-75 flex items-center gap-2",
-                                isDragging ? 'cursor-grabbing scale-105 shadow-2xl opacity-50' : 'cursor-grab'
-                            )}
-                        >
-                           <Move className="h-5 w-5" /> Drag me
-                        </div>
-                    )}
+                    <div className="flex-1 flex items-center justify-center">
+                        {!isDropped && (
+                            <div
+                                id="draggable"
+                                draggable
+                                onDragStart={(e) => handleDragStart(e, 'draggable')}
+                                onDragEnd={handleDragEnd}
+                                className={cn(
+                                    "p-4 bg-primary text-primary-foreground rounded-lg shadow-lg transition-all duration-75 flex items-center gap-2",
+                                    isDragging ? 'cursor-grabbing scale-105 shadow-2xl opacity-50' : 'cursor-grab'
+                                )}
+                            >
+                               <Move className="h-5 w-5" /> Drag me
+                            </div>
+                        )}
+                    </div>
                 </div>
                 <div
                     id="target-container"
@@ -602,12 +602,14 @@ export default function PlaygroundPage() {
                     onDragOver={handleDragOver}
                     onDrop={handleDrop}
                 >
-                     <p className="text-sm font-semibold mb-2">Drop Here</p>
-                    {isDropped ? (
-                        <div className="text-green-700 font-bold p-4 bg-green-200 rounded-lg">Dropped!</div>
-                    ) : (
-                        <span className="text-muted-foreground">Drop zone</span>
-                    )}
+                    <p className="text-sm font-semibold mb-2">Drop Here</p>
+                    <div className="flex-1 flex items-center justify-center">
+                        {isDropped ? (
+                            <div className="text-green-700 font-bold p-4 bg-green-200 rounded-lg">Dropped!</div>
+                        ) : (
+                            <span className="text-muted-foreground">Drop zone</span>
+                        )}
+                    </div>
                 </div>
             </CardContent>
         </Card>
@@ -672,4 +674,5 @@ export default function PlaygroundPage() {
       </div>
     </div>
   );
-}
+
+    
