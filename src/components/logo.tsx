@@ -5,11 +5,11 @@ export function Logo() {
   return (
     <Link href="/" className="flex items-center gap-2" prefetch={false}>
       <svg
-        width="36"
-        height="36"
+        width="48"
+        height="48"
         viewBox="0 0 100 100"
         xmlns="http://www.w3.org/2000/svg"
-        className="h-9 w-9"
+        className="h-12 w-12"
       >
         <circle cx="50" cy="50" r="48" fill="#FFD700" stroke="#000000" strokeWidth="2" />
         <path d="M20 40 L50 30 L80 40 L50 50 Z" fill="#4A4A4A"/>
