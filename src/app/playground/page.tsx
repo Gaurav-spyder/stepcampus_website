@@ -97,6 +97,9 @@ export default function PlaygroundPage() {
   const [isTimerActive, setIsTimerActive] = React.useState(false);
   const [showDelayedText, setShowDelayedText] = React.useState(false);
 
+  const [openCombobox, setOpenCombobox] = React.useState(false);
+  const [comboboxValue, setComboboxValue] = React.useState('');
+
   React.useEffect(() => {
     if (!isTimerActive) return;
 
@@ -260,15 +263,50 @@ export default function PlaygroundPage() {
               </select>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="framework-select">Suggestive Dropdown</Label>
-                <select id="framework-select" className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
-                    <option value="">Select framework...</option>
-                    {frameworks.map((framework) => (
-                      <option key={framework.value} value={framework.value}>
-                        {framework.label}
-                      </option>
-                    ))}
-              </select>
+              <Label>Suggestive Dropdown</Label>
+                <Popover open={openCombobox} onOpenChange={setOpenCombobox}>
+                    <PopoverTrigger asChild>
+                        <Button
+                        variant="outline"
+                        role="combobox"
+                        aria-expanded={openCombobox}
+                        className="w-full justify-between"
+                        >
+                        {comboboxValue
+                            ? frameworks.find((framework) => framework.value === comboboxValue)?.label
+                            : 'Select framework...'}
+                        <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                        </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-[--radix-popover-trigger-width] p-0">
+                        <Command>
+                            <CommandInput placeholder="Search framework..." />
+                            <CommandList>
+                                <CommandEmpty>No framework found.</CommandEmpty>
+                                <CommandGroup>
+                                    {frameworks.map((framework) => (
+                                    <CommandItem
+                                        key={framework.value}
+                                        value={framework.value}
+                                        onSelect={(currentValue) => {
+                                            setComboboxValue(currentValue === comboboxValue ? '' : currentValue);
+                                            setOpenCombobox(false);
+                                        }}
+                                    >
+                                        <Check
+                                            className={cn(
+                                                'mr-2 h-4 w-4',
+                                                comboboxValue === framework.value ? 'opacity-100' : 'opacity-0'
+                                            )}
+                                        />
+                                        {framework.label}
+                                    </CommandItem>
+                                    ))}
+                                </CommandGroup>
+                            </CommandList>
+                        </Command>
+                    </PopoverContent>
+                </Popover>
             </div>
           </CardContent>
         </Card>
