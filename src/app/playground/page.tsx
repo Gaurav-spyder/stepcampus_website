@@ -11,7 +11,8 @@ import {
   EyeOff,
   Upload,
   ChevronsUpDown,
-  Move
+  Move,
+  Clock
 } from 'lucide-react';
 import {
   AlertDialog,
@@ -100,6 +101,28 @@ export default function PlaygroundPage() {
   const [isDragging, setIsDragging] = React.useState(false);
   const [draggedItem, setDraggedItem] = React.useState<string | null>(null);
   const [isDropped, setIsDropped] = React.useState(false);
+
+  const [countdown, setCountdown] = React.useState(5);
+  const [showDelayedText, setShowDelayedText] = React.useState(false);
+
+  React.useEffect(() => {
+    // Don't start the timer if the text is already visible
+    if (showDelayedText) return;
+
+    // Exit early if countdown is already at 0
+    if (countdown === 0) {
+      setShowDelayedText(true);
+      return;
+    }
+
+    // Set a timeout to decrement the countdown
+    const timerId = setTimeout(() => {
+      setCountdown(countdown - 1);
+    }, 1000);
+
+    // Clear the timeout if the component unmounts
+    return () => clearTimeout(timerId);
+  }, [countdown, showDelayedText]);
 
 
   const handleDateInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -671,8 +694,28 @@ export default function PlaygroundPage() {
             </CardContent>
         </Card>
 
+        {/* Delayed Text */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="font-headline">Delayed Text</CardTitle>
+          </CardHeader>
+          <CardContent className="flex items-center justify-center h-24">
+            {showDelayedText ? (
+              <p className="text-lg font-semibold text-green-500">I am here!</p>
+            ) : (
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <Clock className="h-5 w-5" />
+                <span>Wait for {countdown}s</span>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
+
       </div>
     </div>
   );
 
     
+
+}
