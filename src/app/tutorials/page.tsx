@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
@@ -11,6 +12,13 @@ const tutorials = [
     imageUrl: 'https://placehold.co/600x400.png',
     imageHint: 'automation testing',
   },
+  {
+    title: 'Appium Full Course',
+    description: 'Learn mobile automation from scratch with this complete Appium playlist.',
+    href: 'https://youtube.com/playlist?list=PLfYPqIerSaIVdK0t7sR1622L5i0s8-y7E&si=bE4b6i4eYtZbY0H0',
+    imageUrl: 'https://placehold.co/600x400.png',
+    imageHint: 'mobile automation',
+  },
 ];
 
 export default function TutorialsPage() {
@@ -21,11 +29,11 @@ export default function TutorialsPage() {
           Tutorials
         </h1>
         <p className="mt-2 max-w-2xl mx-auto text-muted-foreground md:text-lg">
-          Browse our guides to learn selenium.
+          Browse our guides to learn automation testing.
         </p>
       </div>
 
-      <div className="mx-auto grid max-w-lg gap-8">
+      <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-2">
         {tutorials.map((tutorial) => (
           <Card key={tutorial.title} className="overflow-hidden">
              <Link href={tutorial.href} target="_blank" rel="noopener noreferrer">
