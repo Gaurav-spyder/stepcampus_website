@@ -1,12 +1,12 @@
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { CheckCircle, FlaskConical, BookOpen, Code2 } from 'lucide-react';
+import { CheckCircle, Bug, BookOpen, Code2 } from 'lucide-react';
 import Link from 'next/link';
 
 const features = [
   {
-    icon: <FlaskConical className="h-10 w-10 text-primary" />,
+    icon: <Bug className="h-10 w-10 text-primary" />,
     title: 'Interactive Playground',
     description: 'Practice with dozens of UI components like forms, tables, and popups.',
     href: '/playground',
@@ -54,7 +54,7 @@ export default function Home() {
             <div className="flex justify-center">
               <div className="relative">
                  <div className="absolute inset-0 -m-4 rounded-full bg-primary/10 blur-3xl"></div>
-                  <FlaskConical className="relative h-48 w-48 text-primary/80 lg:h-64 lg:w-64" strokeWidth={1}/>
+                  <Bug className="relative h-48 w-48 text-primary/80 lg:h-64 lg:w-64" strokeWidth={1}/>
               </div>
             </div>
           </div>
