@@ -1,3 +1,4 @@
+
 'use client';
 
 import {
@@ -101,12 +102,6 @@ export default function PlaygroundPage() {
   const [isDropped, setIsDropped] = React.useState(false);
 
 
-  React.useEffect(() => {
-    const today = new Date();
-    setDate(today);
-    setDateInput(format(today, 'dd/MM/yyyy'));
-  }, []);
-
   const handleDateInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setDateInput(value);
@@ -191,7 +186,7 @@ export default function PlaygroundPage() {
           <CardContent className="space-y-6">
             <div className="space-y-2">
               <Label>Radio Buttons</Label>
-              <RadioGroup defaultValue="option-one">
+              <RadioGroup>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="option-one" id="r1" />
                   <Label htmlFor="r1">Option One</Label>
@@ -209,7 +204,7 @@ export default function PlaygroundPage() {
                 <Label htmlFor="terms">Accept terms and conditions</Label>
               </div>
               <div className="flex items-center space-x-2">
-                <Checkbox id="newsletter" defaultChecked />
+                <Checkbox id="newsletter" />
                 <Label htmlFor="newsletter">Subscribe to newsletter</Label>
               </div>
             </div>
