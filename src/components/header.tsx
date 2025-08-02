@@ -21,11 +21,6 @@ const navLinks = [
 
 export function Header() {
   const pathname = usePathname();
-  const [isClient, setIsClient] = React.useState(false);
-
-  React.useEffect(() => {
-    setIsClient(true);
-  }, []);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -52,8 +47,8 @@ export function Header() {
         </nav>
 
         <div className="flex flex-1 items-center justify-between md:justify-end">
-          <div className="md:hidden">
-           {isClient && <Sheet>
+          <div className="flex items-center md:hidden">
+            <Sheet>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon">
                   <Menu className="h-6 w-6" />
@@ -81,7 +76,10 @@ export function Header() {
                   </nav>
                 </div>
               </SheetContent>
-            </Sheet>}
+            </Sheet>
+            <div className="md:hidden">
+                <Logo />
+            </div>
           </div>
         </div>
       </div>

@@ -1,27 +1,15 @@
 
-'use client'
-
 import './globals.css';
 import { cn } from '@/lib/utils';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { Toaster } from '@/components/ui/toaster';
-import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const pathname = usePathname();
-  const [isClient, setIsClient] = useState(false)
-
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
-
-
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -37,11 +25,11 @@ export default function RootLayout({
           'min-h-screen bg-background font-body antialiased dark'
         )}
       >
-        {isClient && <div className="relative flex min-h-screen flex-col">
-          <Header key={pathname} />
+        <div className="relative flex min-h-screen flex-col">
+          <Header />
           <main className="flex-1">{children}</main>
           <Footer />
-        </div>}
+        </div>
         <Toaster />
       </body>
     </html>
