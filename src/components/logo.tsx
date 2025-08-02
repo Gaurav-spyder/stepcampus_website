@@ -15,7 +15,6 @@ export function Logo() {
         <text
             x="24"
             y="27"
-            fontFamily='"Space Grotesk", sans-serif'
             fontSize="10px"
             fontWeight="bold"
             fill="#0F172A"
