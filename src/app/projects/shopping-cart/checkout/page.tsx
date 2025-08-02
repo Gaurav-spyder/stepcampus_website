@@ -8,12 +8,21 @@ import { Label } from '@/components/ui/label';
 import { ArrowLeft, CreditCard } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 export default function CheckoutPage() {
     const router = useRouter();
+    const [cardNumber, setCardNumber] = useState('');
+    const [expiryDate, setExpiryDate] = useState('');
+    const [cvv, setCvv] = useState('');
+    const [cardHolder, setCardHolder] = useState('');
+
+    const isFormComplete = cardNumber && expiryDate && cvv && cardHolder;
 
     const handlePayment = () => {
-        router.push('/projects/shopping-cart/checkout/success');
+        if (isFormComplete) {
+            router.push('/projects/shopping-cart/checkout/success');
+        }
     }
 
   return (
@@ -40,23 +49,23 @@ export default function CheckoutPage() {
                 <CardContent className="space-y-4">
                     <div className="space-y-2">
                         <Label htmlFor="card-number">Card Number</Label>
-                        <Input id="card-number" placeholder="4242 4242 4242 4242" />
+                        <Input id="card-number" placeholder="4242 4242 4242 4242" value={cardNumber} onChange={(e) => setCardNumber(e.target.value)} />
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-2">
                             <Label htmlFor="expiry-date">Expiry Date</Label>
-                            <Input id="expiry-date" placeholder="MM/YY" />
+                            <Input id="expiry-date" placeholder="MM/YY" value={expiryDate} onChange={(e) => setExpiryDate(e.target.value)} />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="cvv">CVV</Label>
-                            <Input id="cvv" placeholder="123" />
+                            <Input id="cvv" placeholder="123" value={cvv} onChange={(e) => setCvv(e.target.value)} />
                         </div>
                     </div>
                      <div className="space-y-2">
                         <Label htmlFor="card-holder">Card Holder Name</Label>
-                        <Input id="card-holder" placeholder="CardHolderName" />
+                        <Input id="card-holder" placeholder="CardHolderName" value={cardHolder} onChange={(e) => setCardHolder(e.target.value)} />
                     </div>
-                    <Button className="w-full" onClick={handlePayment}>
+                    <Button className="w-full" onClick={handlePayment} disabled={!isFormComplete}>
                         Pay Now
                     </Button>
                 </CardContent>
