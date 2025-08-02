@@ -216,7 +216,7 @@ export default function PlaygroundPage() {
                         checked={toggleState}
                         onCheckedChange={setToggleState}
                     />
-                    <Label htmlFor="airplane-mode" className="w-10 text-center font-bold">
+                    <Label htmlFor="airplane-mode" className="w-10 text-center font-bold text-foreground/80">
                         {toggleState ? 'ON' : 'OFF'}
                     </Label>
                 </div>
@@ -573,10 +573,11 @@ export default function PlaygroundPage() {
             <CardContent className="grid grid-cols-2 gap-4">
                 <div
                     id="source-container"
-                    className="h-48 w-full rounded-md border-2 border-dashed flex items-center justify-center"
+                    className="h-48 w-full rounded-lg border-2 border-dashed flex flex-col items-center justify-center p-4"
                     onDragOver={handleDragOver}
                     onDrop={handleDrop}
                 >
+                    <p className="text-sm font-semibold mb-2">Drag From Here</p>
                     {!isDropped && (
                         <div
                             id="draggable"
@@ -584,7 +585,7 @@ export default function PlaygroundPage() {
                             onDragStart={(e) => handleDragStart(e, 'draggable')}
                             onDragEnd={handleDragEnd}
                             className={cn(
-                                "p-2 bg-primary text-primary-foreground rounded-lg shadow-lg transition-all duration-75 flex items-center gap-2",
+                                "p-4 bg-primary text-primary-foreground rounded-lg shadow-lg transition-all duration-75 flex items-center gap-2",
                                 isDragging ? 'cursor-grabbing scale-105 shadow-2xl opacity-50' : 'cursor-grab'
                             )}
                         >
@@ -595,16 +596,17 @@ export default function PlaygroundPage() {
                 <div
                     id="target-container"
                     className={cn(
-                        "h-48 w-full rounded-md border-2 border-dashed flex items-center justify-center transition-colors",
-                         isDropped ? 'bg-green-100 border-green-500' : ''
+                        "h-48 w-full rounded-lg border-2 border-dashed flex flex-col items-center justify-center p-4 transition-colors",
+                         isDropped ? 'bg-green-100 border-green-500' : 'bg-muted/20'
                     )}
                     onDragOver={handleDragOver}
                     onDrop={handleDrop}
                 >
+                     <p className="text-sm font-semibold mb-2">Drop Here</p>
                     {isDropped ? (
-                        <div className="text-green-700 font-bold p-2 bg-green-200 rounded-lg">Dropped!</div>
+                        <div className="text-green-700 font-bold p-4 bg-green-200 rounded-lg">Dropped!</div>
                     ) : (
-                        <span className="text-muted-foreground">Drop here</span>
+                        <span className="text-muted-foreground">Drop zone</span>
                     )}
                 </div>
             </CardContent>
