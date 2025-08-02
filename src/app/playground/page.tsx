@@ -715,7 +715,7 @@ export default function PlaygroundPage() {
                     </PopoverContent>
                 </Popover>
             </CardContent>
-        </card>
+        </Card>
 
          {/* Window/Tab Management */}
          <Card>
