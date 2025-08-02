@@ -12,17 +12,6 @@ export function Logo() {
         fill="none"
       >
         <circle cx="24" cy="24" r="22" fill="#FFD700" />
-        <text
-            x="24"
-            y="27"
-            fontSize="10px"
-            fontWeight="bold"
-            fill="#0F172A"
-            textAnchor="middle"
-            dominantBaseline="middle"
-        >
-            StepCampus
-        </text>
       </svg>
       <span className="text-xl font-headline font-bold text-foreground">
         StepCampus
