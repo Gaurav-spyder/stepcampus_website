@@ -419,19 +419,19 @@ export default function PlaygroundPage() {
                 <TableRow>
                   <TableCell>John Doe</TableCell>
                   <TableCell>Software Engineer</TableCell>
-                  <TableCell>john.doe@example.com</TableCell>
+                  <TableCell>john.doe@stepcampus.com</TableCell>
                   <TableCell>Member</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>Jane Smith</TableCell>
                   <TableCell>Project Manager</TableCell>
-                  <TableCell>jane.smith@example.com</TableCell>
+                  <TableCell>jane.smith@stepcampus.com</TableCell>
                   <TableCell>Admin</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>Sam Brown</TableCell>
                   <TableCell>UI/UX Designer</TableCell>
-                  <TableCell>sam.brown@example.com</TableCell>
+                  <TableCell>sam.brown@stepcampus.com</TableCell>
                   <TableCell>Member</TableCell>
                 </TableRow>
               </TableBody>
@@ -569,7 +569,7 @@ export default function PlaygroundPage() {
         
         {/* Drag and Drop */}
         <Card className="lg:col-span-2">
-            <CardHeader><CardTitle>Drag and Drop</CardTitle></CardHeader>
+          <CardHeader><CardTitle>Drag and Drop</CardTitle></CardHeader>
             <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div
                     id="source-container"

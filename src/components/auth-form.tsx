@@ -168,7 +168,7 @@ export function AuthForm({ type }: AuthFormProps) {
                     <FormControl>
                       <Input
                         type="email"
-                        placeholder="m@example.com"
+                        placeholder="m@stepcampus.com"
                         {...field}
                       />
                     </FormControl>

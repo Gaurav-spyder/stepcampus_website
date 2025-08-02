@@ -99,7 +99,7 @@ export default function ContactPage() {
                     <FormItem>
                       <FormLabel>Email</FormLabel>
                       <FormControl>
-                        <Input placeholder="your.email@example.com" {...field} />
+                        <Input placeholder="your.email@stepcampus.com" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
