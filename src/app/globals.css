@@ -12,7 +12,7 @@ body {
     --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
     --card-foreground: 240 10% 3.9%;
-    --primary: 217 89% 25%; /* Deep Navy Blue */
+    --primary: 142 76% 36%; /* Light Green */
     --primary-foreground: 210 40% 98%;
     --secondary: 240 4.8% 95.9%;
     --secondary-foreground: 240 10% 3.9%;
@@ -24,8 +24,8 @@ body {
     --destructive-foreground: 210 40% 98%;
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
-    --ring: 217 89% 25%;
-    --chart-1: 217 89% 25%;
+    --ring: 142 76% 36%;
+    --chart-1: 142 76% 36%;
     --chart-2: 0 72% 51%; /* Red for charts */
     --chart-3: 240 5% 65%;
     --chart-4: 210 10% 43%;
@@ -39,7 +39,7 @@ body {
     --card-foreground: 210 40% 98%;
     --popover: 240 10% 3.9%;
     --popover-foreground: 210 40% 98%;
-    --primary: 217 89% 35%;
+    --primary: 142 76% 46%;
     --primary-foreground: 210 40% 98%;
     --secondary: 240 3.7% 15.9%;
     --secondary-foreground: 210 40% 98%;
@@ -51,7 +51,7 @@ body {
     --destructive-foreground: 210 40% 98%;
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
-    --ring: 217 89% 35%;
+    --ring: 142 76% 46%;
   }
 }
 
