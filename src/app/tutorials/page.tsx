@@ -26,7 +26,7 @@ export default function TutorialsPage() {
         </p>
       </div>
 
-      <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-2">
+      <div className="mx-auto grid max-w-2xl gap-8">
         {tutorials.map((tutorial) => (
           <Card key={tutorial.title} className="overflow-hidden">
              <Link href={tutorial.href} target="_blank" rel="noopener noreferrer">
