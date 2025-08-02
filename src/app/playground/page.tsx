@@ -71,12 +71,17 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Slider } from '@/components/ui/slider';
 
 
-const frameworks = [
-  { value: 'react', label: 'React' },
-  { value: 'angular', label: 'Angular' },
-  { value: 'vue', label: 'Vue' },
-  { value: 'svelte', label: 'Svelte' },
-  { value: 'solid', label: 'Solid' },
+const countries = [
+    { value: 'usa', label: 'United States' },
+    { value: 'canada', label: 'Canada' },
+    { value: 'india', label: 'India' },
+    { value: 'uk', label: 'United Kingdom' },
+    { value: 'australia', label: 'Australia' },
+    { value: 'japan', label: 'Japan' },
+    { value: 'germany', label: 'Germany' },
+    { value: 'brazil', label: 'Brazil' },
+    { value: 'china', label: 'China' },
+    { value: 'south-africa', label: 'South Africa' },
 ];
 
 export default function PlaygroundPage() {
@@ -273,21 +278,21 @@ export default function PlaygroundPage() {
                         className="w-full justify-between"
                         >
                         {comboboxValue
-                            ? frameworks.find((framework) => framework.value === comboboxValue)?.label
-                            : 'Select framework...'}
+                            ? countries.find((country) => country.value === comboboxValue)?.label
+                            : 'Select country...'}
                         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                         </Button>
                     </PopoverTrigger>
                     <PopoverContent className="w-[--radix-popover-trigger-width] p-0">
                         <Command>
-                            <CommandInput placeholder="Search framework..." />
+                            <CommandInput placeholder="Search country..." />
                             <CommandList>
-                                <CommandEmpty>No framework found.</CommandEmpty>
+                                <CommandEmpty>No country found.</CommandEmpty>
                                 <CommandGroup>
-                                    {frameworks.map((framework) => (
+                                    {countries.map((country) => (
                                     <CommandItem
-                                        key={framework.value}
-                                        value={framework.value}
+                                        key={country.value}
+                                        value={country.value}
                                         onSelect={(currentValue) => {
                                             setComboboxValue(currentValue === comboboxValue ? '' : currentValue);
                                             setOpenCombobox(false);
@@ -296,10 +301,10 @@ export default function PlaygroundPage() {
                                         <Check
                                             className={cn(
                                                 'mr-2 h-4 w-4',
-                                                comboboxValue === framework.value ? 'opacity-100' : 'opacity-0'
+                                                comboboxValue === country.value ? 'opacity-100' : 'opacity-0'
                                             )}
                                         />
-                                        {framework.label}
+                                        {country.label}
                                     </CommandItem>
                                     ))}
                                 </CommandGroup>
