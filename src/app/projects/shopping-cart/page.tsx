@@ -35,13 +35,14 @@ const allProducts: Product[] = [
 
 export default function ShoppingCartProjectPage() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [cart, setCart] = useState<CartItem[]>(() => {
-    if (typeof window === 'undefined') {
-        return [];
-    }
+  const [cart, setCart] = useState<CartItem[]>([]);
+
+  useEffect(() => {
     const savedCart = sessionStorage.getItem('cart');
-    return savedCart ? JSON.parse(savedCart) : [];
-  });
+    if (savedCart) {
+        setCart(JSON.parse(savedCart));
+    }
+  }, []);
 
   useEffect(() => {
     sessionStorage.setItem('cart', JSON.stringify(cart));
@@ -142,7 +143,7 @@ export default function ShoppingCartProjectPage() {
                         </Card>
                     ))}
                     {filteredProducts.length === 0 && (
-                        <div className="md:col-span-2 xl:col-span-3 text-center text-muted-foreground py-10">
+                        <div className="md:col-span-2 xl:grid-cols-3 text-center text-muted-foreground py-10">
                             <p>No products found matching your search.</p>
                         </div>
                     )}
