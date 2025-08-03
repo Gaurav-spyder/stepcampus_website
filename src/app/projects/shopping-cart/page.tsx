@@ -36,17 +36,21 @@ const allProducts: Product[] = [
 export default function ShoppingCartProjectPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [cart, setCart] = useState<CartItem[]>([]);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    setIsClient(true);
     const savedCart = sessionStorage.getItem('cart');
     if (savedCart) {
-        setCart(JSON.parse(savedCart));
+      setCart(JSON.parse(savedCart));
     }
   }, []);
 
   useEffect(() => {
-    sessionStorage.setItem('cart', JSON.stringify(cart));
-  }, [cart]);
+    if (isClient) {
+        sessionStorage.setItem('cart', JSON.stringify(cart));
+    }
+  }, [cart, isClient]);
 
 
   const filteredProducts = useMemo(() => {
@@ -92,7 +96,7 @@ export default function ShoppingCartProjectPage() {
             <div className="flex items-center gap-4">
                 <div className="relative">
                     <ShoppingCart className="h-6 w-6"/>
-                    {cartCount > 0 && <Badge variant="destructive" className="absolute -top-2 -right-3 px-2">{cartCount}</Badge>}
+                    {isClient && cartCount > 0 && <Badge variant="destructive" className="absolute -top-2 -right-3 px-2">{cartCount}</Badge>}
                 </div>
                  <Button asChild variant="outline" size="sm">
                   <Link href="/projects">
