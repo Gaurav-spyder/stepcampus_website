@@ -26,8 +26,9 @@ import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { Alert, AlertDescription, AlertTitle } from './ui/alert';
 import { Terminal } from 'lucide-react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
+import { login, signup } from '@/app/actions';
 
 const loginSchema = z.object({
   email: z.string().email({ message: 'Invalid email address.' }),
@@ -42,6 +43,7 @@ const signupSchema = z.object({
     .string()
     .min(6, { message: 'Password must be at least 6 characters.' }),
   captcha: z.string().nonempty({ message: 'Please solve the captcha.' }),
+  captchaChallenge: z.string(),
 });
 
 type AuthFormProps = {
@@ -53,8 +55,9 @@ export function AuthForm({ type }: AuthFormProps) {
   const formSchema = isLogin ? loginSchema : signupSchema;
   const { toast } = useToast();
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
   
-  const [captcha, setCaptcha] = useState<{ num1: number, num2: number, operator: string, answer: number } | null>(null);
+  const [captcha, setCaptcha] = useState<{ num1: number, num2: number, operator: string, challenge: string } | null>(null);
 
   const generateCaptcha = () => {
     const num1 = Math.floor(Math.random() * 10) + 1;
@@ -67,10 +70,10 @@ export function AuthForm({ type }: AuthFormProps) {
             answer = num1 + num2;
             break;
         case '-':
-            // ensure result is not negative
             if (num1 < num2) {
                 answer = num2 - num1;
-                setCaptcha({ num1: num2, num2: num1, operator, answer });
+                const challenge = btoa(`${num2}${operator}${num1}=${answer}`);
+                setCaptcha({ num1: num2, num2: num1, operator, challenge });
                 return;
             }
             answer = num1 - num2;
@@ -79,9 +82,10 @@ export function AuthForm({ type }: AuthFormProps) {
             answer = num1 * num2;
             break;
         default:
-            answer = num1 + num2;
+             answer = num1 + num2;
     }
-    setCaptcha({ num1, num2, operator, answer });
+    const challenge = btoa(`${num1}${operator}${num2}=${answer}`);
+    setCaptcha({ num1, num2, operator, challenge });
   };
   
   useEffect(() => {
@@ -95,43 +99,45 @@ export function AuthForm({ type }: AuthFormProps) {
     resolver: zodResolver(formSchema),
     defaultValues: isLogin
       ? { email: '', password: '' }
-      : { email: '', password: '', captcha: '' },
+      : { email: '', password: '', captcha: '', captchaChallenge: '' },
   });
-
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    if (isLogin) {
-        const { email, password } = values as z.infer<typeof loginSchema>;
-        if (email === 'hi@stepcampus.in' && password === 'Stepcampus@123') {
-             toast({
-                title: 'Login Successful!',
-                description: 'Welcome back! Redirecting to dashboard...',
-             });
-             form.reset();
-             router.push('/dashboard');
-        } else {
-            form.setError('email', { type: 'manual', message: 'Invalid email or password.' });
-            form.setError('password', { type: 'manual', message: 'Invalid email or password.' });
-        }
-    } else {
-        const { email, password, captcha: captchaAnswer } = values as z.infer<typeof signupSchema>;
-        let hasError = false;
-
-        if (email !== 'hi@stepcampus.in' || password !== 'Stepcampus@123') {
-            form.setError('email', { type: 'manual', message: 'Invalid email or password.' });
-            form.setError('password', { type: 'manual', message: 'Invalid email or password.' });
-            hasError = true;
-        }
-        
-        if (captcha && parseInt(captchaAnswer, 10) !== captcha.answer) {
-            form.setError('captcha', { type: 'manual', message: 'Incorrect captcha answer. Try again.' });
-            generateCaptcha();
-            hasError = true;
-        }
-
-        if(hasError) return;
-
-        router.push('/signup-success');
+  
+  useEffect(() => {
+    if (captcha) {
+        form.setValue('captchaChallenge', captcha.challenge);
     }
+  }, [captcha, form]);
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    startTransition(async () => {
+        if (isLogin) {
+            const result = await login(values as z.infer<typeof loginSchema>);
+            if (result.success) {
+                toast({
+                    title: 'Login Successful!',
+                    description: 'Welcome back! Redirecting to dashboard...',
+                });
+                form.reset();
+                router.push('/dashboard');
+            } else {
+                form.setError('email', { type: 'manual', message: result.error });
+                form.setError('password', { type: 'manual', message: result.error });
+            }
+        } else {
+            const result = await signup(values as z.infer<typeof signupSchema>);
+             if (result.success) {
+                router.push('/signup-success');
+            } else {
+                if (result.field === 'captcha') {
+                    form.setError('captcha', { type: 'manual', message: result.error });
+                    generateCaptcha();
+                } else {
+                    form.setError('email', { type: 'manual', message: result.error });
+                    form.setError('password', { type: 'manual', message: result.error });
+                }
+            }
+        }
+    });
   }
 
   return (
@@ -194,6 +200,7 @@ export function AuthForm({ type }: AuthFormProps) {
                 )}
               />
                {!isLogin && captcha && (
+                <>
                 <FormField
                   control={form.control}
                   name="captcha"
@@ -213,9 +220,21 @@ export function AuthForm({ type }: AuthFormProps) {
                     </FormItem>
                   )}
                 />
+                <FormField
+                  control={form.control}
+                  name="captchaChallenge"
+                  render={({ field }) => (
+                    <FormItem>
+                       <FormControl>
+                        <Input type="hidden" {...field} />
+                       </FormControl>
+                    </FormItem>
+                  )}
+                />
+                </>
               )}
-              <Button type="submit" className="w-full">
-                {isLogin ? 'Login' : 'Sign Up'}
+              <Button type="submit" className="w-full" disabled={isPending}>
+                {isPending ? 'Processing...' : (isLogin ? 'Login' : 'Sign Up')}
               </Button>
             </form>
           </Form>
@@ -247,3 +266,4 @@ export function AuthForm({ type }: AuthFormProps) {
     </div>
   );
 }
+
