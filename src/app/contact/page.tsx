@@ -18,6 +18,24 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { Mail, MapPin } from 'lucide-react';
+import Link from 'next/link';
+
+const TelegramIcon = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M15 10l-4 4 6 6 4-16-18 7 4 2 2 6 3-4" />
+    </svg>
+  );
 
 const contactFormSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
@@ -69,6 +87,15 @@ export default function ContactPage() {
                 <h3 className="font-semibold text-foreground">Email Us</h3>
                 <p>yourstepcampus@gmail.com</p>
               </div>
+            </div>
+            <div className="flex items-start gap-4">
+                <TelegramIcon className="h-6 w-6 text-primary mt-1" />
+                <div>
+                    <h3 className="font-semibold text-foreground">Join our Telegram</h3>
+                    <a href="https://t.me/stepcampus" target="_blank" rel="noopener noreferrer" className="hover:underline">
+                        t.me/stepcampus
+                    </a>
+                </div>
             </div>
           </div>
         </div>

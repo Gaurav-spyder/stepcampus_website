@@ -3,6 +3,24 @@ import { Github, Linkedin, Youtube } from 'lucide-react';
 import Link from 'next/link';
 import { Logo } from './logo';
 
+
+const TelegramIcon = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M15 10l-4 4 6 6 4-16-18 7 4 2 2 6 3-4" />
+    </svg>
+  );
+
 export function Footer() {
   return (
     <footer className="w-full border-t bg-card text-card-foreground">
@@ -63,6 +81,9 @@ export function Footer() {
             <Link href="https://github.com/Gaurav-spyder" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
               <Github className="h-5 w-5 text-muted-foreground transition-colors hover:text-foreground" />
             </Link>
+             <Link href="https://t.me/stepcampus" aria-label="Telegram" target="_blank" rel="noopener noreferrer">
+                <TelegramIcon className="h-5 w-5 text-muted-foreground transition-colors hover:text-foreground" />
+             </Link>
           </div>
         </div>
       </div>

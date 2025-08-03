@@ -26,11 +26,11 @@ type CartItem = {
 
 const allProducts: Product[] = [
   { id: 1, name: 'Wireless Mouse', price: 25.99, imageUrl: '/Wireless Mouse.jpg', imageHint: 'wireless mouse' },
-  { id: 2, name: 'Mechanical Keyboard', price: 89.99, imageUrl: 'https://placehold.co/600x400.png', imageHint: 'mechanical keyboard' },
-  { id: 3, name: 'USB-C Hub', price: 45.50, imageUrl: 'https://placehold.co/600x400.png', imageHint: 'usb hub' },
-  { id: 4, name: 'Monitor Stand', price: 32.00, imageUrl: 'https://placehold.co/600x400.png', imageHint: 'monitor stand' },
-  { id: 5, name: 'Webcam', price: 55.00, imageUrl: 'https://placehold.co/600x400.png', imageHint: 'webcam' },
-  { id: 6, name: 'Desk Pad', price: 15.00, imageUrl: 'https://placehold.co/600x400.png', imageHint: 'desk pad' },
+  { id: 2, name: 'Mechanical Keyboard', price: 89.99, imageUrl: '/Mechanical Keyboard.jpg', imageHint: 'mechanical keyboard' },
+  { id: 3, name: 'USB-C Hub', price: 45.50, imageUrl: '/USB hub.jpg', imageHint: 'usb hub' },
+  { id: 4, name: 'Monitor Stand', price: 32.00, imageUrl: '/Monitor Stand.jpg', imageHint: 'monitor stand' },
+  { id: 5, name: 'Webcam', price: 55.00, imageUrl: '/webcam.jpg', imageHint: 'webcam' },
+  { id: 6, name: 'Desk Pad', price: 15.00, imageUrl: '/deskpad.jpg', imageHint: 'desk pad' },
 ];
 
 export default function ShoppingCartProjectPage() {
