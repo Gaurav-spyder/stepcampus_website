@@ -1,9 +1,11 @@
 
+'use client';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Check } from 'lucide-react';
 import Link from 'next/link';
+import { useEffect } from 'react';
 
 const projects = [
   {
@@ -57,6 +59,11 @@ const projects = [
 ];
 
 export default function ProjectsPage() {
+  useEffect(() => {
+    // Clear the cart when the user navigates back to the main projects page.
+    sessionStorage.removeItem('cart');
+  }, []);
+
   return (
     <div className="container py-12">
       <div className="mb-12 text-center">
