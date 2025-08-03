@@ -9,7 +9,7 @@ const tutorials = [
     title: 'Selenium Full Course',
     description: 'A comprehensive playlist covering Selenium from basics to advanced topics.',
     href: 'https://youtube.com/playlist?list=PLfYPqIerSaIUX-O5WP5CSn2KtQzTPhMS8&si=rHJAST0Eb5IcmVzn',
-    imageUrl: 'https://placehold.co/600x400.png',
+    imageUrl: '/WEBSITE_TUTORIAL.png',
     imageHint: 'automation testing',
   },
 ];
@@ -26,7 +26,7 @@ export default function TutorialsPage() {
         </p>
       </div>
 
-      <div className="mx-auto grid max-w-2xl gap-8">
+      <div className="mx-auto grid max-w-4xl gap-8">
         {tutorials.map((tutorial) => (
           <Card key={tutorial.title} className="overflow-hidden">
              <Link href={tutorial.href} target="_blank" rel="noopener noreferrer">
@@ -35,7 +35,7 @@ export default function TutorialsPage() {
                 alt={tutorial.title}
                 width={600}
                 height={400}
-                className="w-full object-cover aspect-[3/2]"
+                className="w-full object-cover"
                 data-ai-hint={tutorial.imageHint}
               />
             </Link>
