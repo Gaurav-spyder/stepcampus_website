@@ -3,6 +3,16 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import Image from 'next/image';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Test Automation Tutorials',
+    description: 'Learn test automation from scratch with our in-depth tutorials and full courses. We cover everything from Selenium basics to advanced topics for QA professionals.',
+    alternates: {
+        canonical: '/tutorials',
+    },
+};
+
 
 const tutorials = [
   {

@@ -1,0 +1,10 @@
+
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.stepcampus.in
+
+# Sitemaps
+Sitemap: https://www.stepcampus.in/sitemap.xml

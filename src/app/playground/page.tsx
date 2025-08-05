@@ -77,7 +77,6 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 
-
 const countries = [
     { value: 'usa', label: 'United States' },
     { value: 'canada', label: 'Canada' },
