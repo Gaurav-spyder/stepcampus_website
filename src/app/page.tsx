@@ -28,7 +28,7 @@ const features = [
 export default function Home() {
   return (
     <>
-      <section className="w-full py-20 md:py-32 lg:py-40">
+      <section className="w-full py-12 md:py-20 lg:py-24">
         <div className="container px-4 md:px-6">
           <div className="mx-auto grid max-w-5xl items-center gap-6 lg:grid-cols-2 lg:gap-12">
             <div className="space-y-4">
