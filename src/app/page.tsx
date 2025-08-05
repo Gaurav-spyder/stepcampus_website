@@ -85,8 +85,7 @@ export default function Home() {
                    </Button>
                 </CardContent>
               </Card>
-            </Card>
-          ))}
+            ))}
           </div>
         </div>
       </section>
