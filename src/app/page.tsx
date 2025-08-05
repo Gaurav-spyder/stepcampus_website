@@ -1,7 +1,7 @@
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { CheckCircle, Bug, BookOpen, Code2 } from 'lucide-react';
+import { Bug, BookOpen, Code2 } from 'lucide-react';
 import Link from 'next/link';
 
 const features = [
@@ -28,7 +28,7 @@ const features = [
 export default function Home() {
   return (
     <>
-      <section className="w-full py-12 md:py-20 lg:py-24">
+      <section className="w-full py-12 md:py-16 lg:py-20">
         <div className="container px-4 md:px-6">
           <div className="mx-auto grid max-w-5xl items-center gap-6 lg:grid-cols-2 lg:gap-12">
             <div className="space-y-4">
@@ -36,7 +36,7 @@ export default function Home() {
                 For QA Testers & Developers
               </div>
               <h1 className="font-headline text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-                The Ultimate Playground for Automation Testing
+                Practice Automation Testing Online!
               </h1>
               <p className="max-w-[600px] text-muted-foreground md:text-xl">
                 Sharpen your automation skills with our interactive playground,
