@@ -299,7 +299,15 @@ export default function PlaygroundPage() {
                         </Button>
                     </PopoverTrigger>
                     <PopoverContent className="w-[--radix-popover-trigger-width] p-0">
-                        <Command>
+                        <Command
+                            filter={(value, search) => {
+                                const country = countries.find(c => c.value === value);
+                                if (country) {
+                                    return country.label.toLowerCase().includes(search.toLowerCase()) ? 1 : 0;
+                                }
+                                return 0;
+                            }}
+                        >
                             <CommandInput placeholder="Search country..." />
                             <CommandList>
                                 <CommandEmpty>No country found.</CommandEmpty>
