@@ -60,8 +60,8 @@ export function AuthForm({ type }: AuthFormProps) {
   const [captcha, setCaptcha] = useState<{ num1: number, num2: number, operator: string, challenge: string } | null>(null);
 
   const generateCaptcha = () => {
-    const num1 = Math.floor(Math.random() * 10) + 1;
-    const num2 = Math.floor(Math.random() * 10) + 1;
+    const num1 = Math.floor(Math.random() * 9) + 1;
+    const num2 = Math.floor(Math.random() * 9) + 1;
     const operators = ['+', '-', '*'];
     const operator = operators[Math.floor(Math.random() * operators.length)];
     let answer;
@@ -266,4 +266,3 @@ export function AuthForm({ type }: AuthFormProps) {
     </div>
   );
 }
-
