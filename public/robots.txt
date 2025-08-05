@@ -1,10 +1,7 @@
-
-# *
+# See https://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
+#
+# Allow crawling of all content
 User-agent: *
 Allow: /
 
-# Host
-Host: https://www.stepcampus.in
-
-# Sitemaps
 Sitemap: https://www.stepcampus.in/sitemap.xml
