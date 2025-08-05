@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     siteName: 'StepCampus',
     images: [
       {
-        url: 'https://www.stepcampus.in/logo.png', // Must be an absolute URL
+        url: 'https://www.stepcampus.in/logo.svg', // Must be an absolute URL
         width: 800,
         height: 600,
         alt: 'StepCampus Logo',
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'StepCampus - Practice Automation Testing Online!',
     description: 'Sharpen your automation skills with our interactive playground, comprehensive tutorials, and real-world projects.',
-    images: ['https://www.stepcampus.in/logo.png'], // Must be an absolute URL
+    images: ['https://www.stepcampus.in/logo.svg'], // Must be an absolute URL
   },
   robots: {
     index: true,
