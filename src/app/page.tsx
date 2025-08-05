@@ -36,11 +36,11 @@ export default function Home() {
                 For QA Testers & Developers
               </div>
               <h1 className="font-headline text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-                Practice Automation Testing Online!
+                The Ultimate Playground for Automation Testing
               </h1>
               <p className="max-w-[600px] text-muted-foreground md:text-xl">
                 Sharpen your automation skills with our interactive playground,
-                comprehensive tutorials, and real-world projects.
+                comprehensive tutorials, and real-world projects. StepCampus is the best place for QA Testers and SDETs to practice their automation testing skills on real-world components.
               </p>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
                 <Button asChild size="lg">
@@ -67,8 +67,8 @@ export default function Home() {
             <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl">
               Everything You Need to Become an Automation Pro
             </h2>
-            <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              From basic interactions to complex scenarios, we've got you covered.
+             <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+              StepCampus is the best place for QA Testers and SDETs to practice their automation testing skills on real-world components.
             </p>
           </div>
           <div className="mx-auto mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -85,7 +85,8 @@ export default function Home() {
                    </Button>
                 </CardContent>
               </Card>
-            ))}
+            </Card>
+          ))}
           </div>
         </div>
       </section>

@@ -19,6 +19,17 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { Mail, MapPin } from 'lucide-react';
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Contact Us - StepCampus',
+  description: 'Get in touch with StepCampus for any questions, feedback, or support. We are here to help you with your test automation learning journey.',
+  keywords: ['Contact StepCampus', 'StepCampus support', 'automation testing help', 'QA learning contact'],
+    alternates: {
+        canonical: '/contact',
+    },
+};
+
 
 const TelegramIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg

@@ -6,8 +6,9 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Test Automation Tutorials',
+    title: 'Test Automation Tutorials - Selenium, Playwright & More | StepCampus',
     description: 'Learn test automation from scratch with our in-depth tutorials and full courses. We cover everything from Selenium basics to advanced topics for QA professionals.',
+    keywords: ['test automation tutorials', 'Selenium full course', 'Playwright tutorials', 'learn automation testing', 'QA tutorials', 'SDET courses'],
     alternates: {
         canonical: '/tutorials',
     },
